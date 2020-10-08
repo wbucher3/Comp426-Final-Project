@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/wbucher3/Comp426-Final-Project/issues"
   },
-  "homepage": "https://github.com/wbucher3/Comp426-Final-Project#readme"
+  "homepage": "https://github.com/wbucher3/Comp426-Final-Project#readme",
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
 }
