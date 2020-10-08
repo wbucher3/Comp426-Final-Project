@@ -10,13 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/wbucher3/Comp426-Final-Project.git"
   },
-  "author": "",
+  "author": "Rebekah Seawell, William Bucher",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/wbucher3/Comp426-Final-Project/issues"
   },
   "homepage": "https://github.com/wbucher3/Comp426-Final-Project#readme",
   "dependencies": {
+    "bulma": "^0.9.1",
     "jquery": "^3.5.1"
   }
 }
