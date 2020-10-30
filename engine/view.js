@@ -3,5 +3,10 @@
 export default class View {
     constructor() {
 
+        let background = {
+            sprite= new Sprite.fromImage("../images/background.png"),
+
+        }
+
     }
 }
