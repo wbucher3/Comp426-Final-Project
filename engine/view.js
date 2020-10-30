@@ -1,12 +1,14 @@
 /* handle the display of game and webpage */
 
 export default class View {
-    constructor() {
+    constructor(model) {
+        this.model = model ; 
+        
+        //game should be made in the model
+        //we will append the pixi thing in here
 
-        let background = {
-            sprite= new Sprite.fromImage("../images/background.png"),
+        $('#root').append(this.model.getApp())
 
-        }
 
     }
 }

@@ -10,16 +10,24 @@ placing the enemies, there are only two locations, ground or air.*/
 
 export default class Model {
     constructor() {
+        
+        const app = new Application(1080, 480) ;
+
+        let background = new Sprite.fromImage("../images/background.png");
+
+        app.stage.addChild(background) ; 
+
+
         let player = {
             sprite = new Sprite.fromImage("../images/player.png"),
-            isDead:false,
-            sprite.x = 0, //place holder values, i doubt (0,0) will work
-            sprite.y = 0,  
-            
+            isDead:false, 
         }
+        player.sprite.x = 0; //place holder values, i doubt (0,0) will work
+        player.sprite.y = 0; 
+
+
         /*https://pixijs.download/dev/docs/PIXI.Sprite.html
-            doc for the sprite object within PIXI
-            idk why there is an error for .x and .y, they are in the doc */
+            doc for the sprite object within PIXI */
 
 
         //when obstactles are spawned, they are added to this array
@@ -27,9 +35,15 @@ export default class Model {
         // an array of obstacle objects 
         let obstacleArray = [] ; 
 
+        //basically going to make the whole game in here and append it using the view
+
         
     }
-    
+    //this will be used by the view to append the app to the dom
+    getApp() {
+        return this.app;
+    }
+
     jump() {
         //increase the player's y postion
         // sleep for a bit then lower them back down

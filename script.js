@@ -16,3 +16,18 @@ $(document).ready(() => {
     
  });
 
+ document.onkeydown = (e) => {
+    switch(e.which) {
+        case 38: //up arrow
+            controller.jump();
+            break;
+        case 40: //down arrow
+            controller.duck() ;
+            break;
+
+        default:
+            return;
+    }
+    e.preventDefault() ;
+ };
+
