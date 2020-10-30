@@ -1,6 +1,5 @@
 /* handles all the game logic */
-import {Application, Sprite} from './node_modules/pixi.js'
-
+import {Application, Sprite} from 'pixi.js'
 
 
 /*i think the easiest way to make this game work is to have the player remain stationary
@@ -19,7 +18,7 @@ export default class Model {
 
 
         let player = {
-            sprite = new Sprite.fromImage("../images/player.png"),
+            sprite: new Sprite.fromImage("../images/player.png"),
             isDead:false, 
         }
         player.sprite.x = 0; //place holder values, i doubt (0,0) will work
@@ -74,23 +73,30 @@ export default class Model {
 
 // some boiler plate code, dont know what to do with this just yet
 
-export default class obstacle {
+class obstacle {
     constructor() {
 
+    }
+    move(){
+        //this needs to decrease the x postion of the obstacle 
+        //it will look like its moving toward the player
     }
     // functions to handle the dimensions of the obstacle
 
 }
-export default class flyinyObstactle extends obstacle {
+class flyinyObstactle extends obstacle {
     constructor() {
-        sprite= new Sprite.fromImage("../images/flyingEnemy.png")
-
+        sprite= new Sprite.fromImage("../images/flyingOb.png");
+        this.sprite.x = 0; 
+        this.sprite.y = 0; 
     }
+    
 }
 
-export default class groundObstactle extends obstacle {
+class groundObstactle extends obstacle {
     constructor() {
-        sprite= new Sprite.fromImage("../images/flyingEnemy.png")
-
+        sprite= new Sprite.fromImage("../images/groundOb.png");
+        this.sprite.x = 0;
+        this.sprite.x = 0; 
     }
 }
