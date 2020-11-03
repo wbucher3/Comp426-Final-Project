@@ -18,7 +18,6 @@
   "homepage": "https://github.com/wbucher3/Comp426-Final-Project#readme",
   "dependencies": {
     "bulma": "^0.9.1",
-    "jquery": "^3.5.1",
-    "pixi.js": "^5.3.3"
+    "jquery": "^3.5.1"
   }
 }
