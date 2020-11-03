@@ -1,5 +1,7 @@
 /* handles all the game logic */
-import {Application, Sprite} from 'pixi.js'
+// import {Application} from './pixi.min.js'
+
+// Might not need to import it???????
 
 
 /*i think the easiest way to make this game work is to have the player remain stationary
@@ -10,15 +12,21 @@ placing the enemies, there are only two locations, ground or air.*/
 export default class Model {
     constructor() {
         
-        const app = new Application(1080, 480) ;
+        // const app = new PIXI.Application(1080, 480) ;
 
-        let background = new Sprite.fromImage("../images/background.png");
+        let app = new PIXI.Application({width: 1080, height: 480});
 
-        app.stage.addChild(background) ; 
+        document.body.appendChild(app.view);
+        
+        let board = PIXI.utils.TextureCache["images/background.png"]
+
+        // let background = new PIXI.Sprite.fromImage("../images/background.png");
+
+        app.stage.addChild(board);
 
 
         let player = {
-            sprite: new Sprite.fromImage("../images/player.png"),
+            sprite: new PIXI.Sprite.from("../images/player.png"),
             isDead:false, 
         }
         player.sprite.x = 0; //place holder values, i doubt (0,0) will work
@@ -86,7 +94,7 @@ class obstacle {
 }
 class flyinyObstactle extends obstacle {
     constructor() {
-        sprite= new Sprite.fromImage("../images/flyingOb.png");
+        sprite= new PIXI.Sprite.from("../images/flyingOb.png");
         this.sprite.x = 0; 
         this.sprite.y = 0; 
     }
@@ -95,7 +103,7 @@ class flyinyObstactle extends obstacle {
 
 class groundObstactle extends obstacle {
     constructor() {
-        sprite= new Sprite.fromImage("../images/groundOb.png");
+        sprite= new PIXI.Sprite.from("../images/groundOb.png");
         this.sprite.x = 0;
         this.sprite.x = 0; 
     }
