@@ -9,7 +9,7 @@ let model = null ;
 let controller = null ; 
 let view = null ; 
 
-$(document).ready(() => {
+window.addEventListener('load',() =>   {
     model = new Model();
     view = new View(model);
     controller = new Controller(model, view) ;
