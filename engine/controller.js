@@ -6,9 +6,8 @@ export default class Controller {
         this.view = view;
     }
 
-    jump() {
+    jump = () => {
         this.model.jump();
-        //render the board?
     }
     duck() {
         this.model.duck();

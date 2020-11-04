@@ -16,18 +16,20 @@ window.addEventListener('load',() =>   {
     
  });
 
- document.onkeydown = (e) => {
+ window.addEventListener("keydown", (e)  => {
     switch(e.which) {
-        case 38: //up arrow
-            controller.jump();
+        case 37: 
+        case 65:
+            model.left();
             break;
-        case 40: //down arrow
-            controller.duck() ;
+        case 39:
+        case 68: 
+            model.right() ;
             break;
 
         default:
             return;
     }
     e.preventDefault() ;
- };
+ });
 

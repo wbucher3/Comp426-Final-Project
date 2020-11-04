@@ -1,40 +1,39 @@
 /* handles all the game logic */
-// import {Application} from './pixi.min.js'
-
-// Might not need to import it???????
-
 
 /*i think the easiest way to make this game work is to have the player remain stationary
 and the obstacles move toward the player. then the player can either duck or jump
 honestly this is super similar to how our bird game worked. The main difference is instead of randomly
 placing the enemies, there are only two locations, ground or air.*/
 
-export default class Model {
-    constructor() {
-        
-        // const app = new PIXI.Application(1080, 480) ;
+// http://pixijs.download/v4.4.0/docs/index.html
 
+export default class Model {
+
+    
+    constructor() {
+    
         let app = new PIXI.Application({width: 1080, height: 480});
 
         document.body.appendChild(app.view);
-        
-        let board = PIXI.utils.TextureCache["images/background.png"]
 
-        // let background = new PIXI.Sprite.fromImage("../images/background.png");
+        let background = new PIXI.Sprite.from("../images/background.jpg");
 
-        app.stage.addChild(board);
+        app.stage.addChild(background);
 
 
-        let player = {
+        this.player = {
             sprite: new PIXI.Sprite.from("../images/player.png"),
             isDead:false, 
         }
-        player.sprite.x = 0; //place holder values, i doubt (0,0) will work
-        player.sprite.y = 0; 
+        console.log(this.player)
+        this.player.sprite.x = 0; //place holder values, i doubt (0,0) will work
+        this.player.sprite.y = 0; 
 
+        app.stage.addChild(this.player.sprite);
 
-        /*https://pixijs.download/dev/docs/PIXI.Sprite.html
-            doc for the sprite object within PIXI */
+        for (let i = 0 ; i < 100 ; i++) {
+            this.player.sprite.x += 1
+        }
 
 
         //when obstactles are spawned, they are added to this array
@@ -51,11 +50,11 @@ export default class Model {
         return this.app;
     }
 
-    jump() {
-        //increase the player's y postion
-        // sleep for a bit then lower them back down
+    left (){
+        this.player.sprite.x-= 10 ;
     }
-    duck() {
+    right() {
+        this.player.sprite.x+= 10 ;
         //lower the player's y postion
         // different sprite image? 
         // does it duck for a second then go up or on key release (hold to duck)? 
