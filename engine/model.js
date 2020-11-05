@@ -7,33 +7,50 @@ placing the enemies, there are only two locations, ground or air.*/
 
 // http://pixijs.download/v4.4.0/docs/index.html
 
+/** lanes
+ * 1
+ * 2
+ * 3  (430, 350)
+ * 4
+ * 5
+ * 
+*/
+
 export default class Model {
 
     
     constructor() {
-    
-        let app = new PIXI.Application({width: 1080, height: 480});
 
-        document.body.appendChild(app.view);
+        
+        const scaleWidth = screen.width * (7/12) ;
+        const scaleHeight = screen.height * (7/12) ;
+        const piecesWidth = screen.width * (1/14);
+        const piecesHeight = screen.height * (2/14);
 
-        let background = new PIXI.Sprite.from("../images/background.jpg");
+        
+        let app = new PIXI.Application({width: scaleWidth , height: scaleHeight});
+
+        document.getElementById('root').appendChild(app.view);
+
+        let background = new PIXI.Sprite.from("../images/background.png");
+        background.height = scaleHeight;
+        background.width = scaleWidth;
 
         app.stage.addChild(background);
 
 
         this.player = {
-            sprite: new PIXI.Sprite.from("../images/player.png"),
+            sprite: new PIXI.Sprite.from("../images/ram.png"),
             isDead:false, 
         }
         console.log(this.player)
-        this.player.sprite.x = 0; //place holder values, i doubt (0,0) will work
-        this.player.sprite.y = 0; 
+        this.player.sprite.x = 450; //place holder values, i doubt (0,0) will work
+        this.player.sprite.y = 350; 
+        this.player.sprite.width = piecesWidth;
+        this.player.sprite.height = piecesHeight ;
 
         app.stage.addChild(this.player.sprite);
 
-        for (let i = 0 ; i < 100 ; i++) {
-            this.player.sprite.x += 1
-        }
 
 
         //when obstactles are spawned, they are added to this array
@@ -52,9 +69,12 @@ export default class Model {
 
     left (){
         this.player.sprite.x-= 10 ;
+        console.log( "(" + this.player.sprite.x  + ", " + this.player.sprite.y + ")")
     }
     right() {
         this.player.sprite.x+= 10 ;
+        console.log( "(" + this.player.sprite.x  + ", " + this.player.sprite.y + ")")
+
         //lower the player's y postion
         // different sprite image? 
         // does it duck for a second then go up or on key release (hold to duck)? 
@@ -71,7 +91,10 @@ export default class Model {
         for (enemy in this.obstacleArray) {
             let enemyBounds = enemy.getBounds();
             let playerBounds = this.player.getBounds();
-            if (enemyBounds.x + enemyBounds.width > playerBounds.x && enemyBounds.x < playerBounds.x + playerBounds.width && enemyBounds.y + enemyBounds.height > playerBounds.y && enemyBounds.y < playerBounds.y + playerBounds.height) {
+            if (enemyBounds.x + enemyBounds.width > playerBounds.x && 
+                    enemyBounds.x < playerBounds.x + playerBounds.width && 
+                    enemyBounds.y + enemyBounds.height > playerBounds.y && 
+                    enemyBounds.y < playerBounds.y + playerBounds.height) {
                 this.updateListener(Model.Event.LOSE);
             }
         }

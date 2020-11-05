@@ -27,6 +27,9 @@ window.addEventListener('load',() =>   {
             model.right() ;
             break;
 
+        case 40:
+        case 38:
+            break;
         default:
             return;
     }

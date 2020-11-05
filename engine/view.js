@@ -7,7 +7,7 @@ export default class View {
         //game should be made in the model
         //we will append the pixi thing in here
 
-        document.getElementById("root").appendChild(this.model.getApp());   
+       // document.getElementById("root").appendChild(this.model.getApp());   
 
 
     }
