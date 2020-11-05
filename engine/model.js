@@ -64,7 +64,28 @@ export default class Model {
         // check to see if any obstacles from array intersected with the player
         // set the player to Dead if this is true
         // end the game
-        //do some type of listener?
+        // do some type of listener?
+
+        // depending on how big the ram and enemy's are we will need adjustments
+
+        for (enemy in this.obstacleArray) {
+            let enemyBounds = enemy.getBounds();
+            let playerBounds = this.player.getBounds();
+            if (enemyBounds.x + enemyBounds.width > playerBounds.x && enemyBounds.x < playerBounds.x + playerBounds.width && enemyBounds.y + enemyBounds.height > playerBounds.y && enemyBounds.y < playerBounds.y + playerBounds.height) {
+                this.updateListener(Model.Event.LOSE);
+            }
+        }
+
+    }
+
+    onLose() {
+
+    }
+
+    distance(enemy) {
+        // The distance formula
+        return Math.sqrt((enemy.x - this.player.x) ** 2 + (enemy.y - this.player.y) ** 2)
+        // √((x_2-x_1)²+(y_2-y_1)²)
     }
 
     spawnObstacle() {
@@ -74,6 +95,21 @@ export default class Model {
 
     removeObstacle() {
         //removes the obstacle from the array of obstacles
+    }
+
+    addListener(listener) {
+        let idx = this.listeners.findIndex((l) => l == listener);
+        if (idx == -1) {
+            this.listeners.push(listener);
+        }
+    }
+
+    updateListener(event) {
+        this.listeners.forEach((l) => {
+            if (l.event === event) {
+                l.func()
+            }
+        });
     }
 }
 
@@ -106,4 +142,8 @@ class groundObstactle extends obstacle {
         this.sprite.x = 0;
         this.sprite.x = 0; 
     }
+}
+
+Model.Event = {
+    LOSE: 1
 }
