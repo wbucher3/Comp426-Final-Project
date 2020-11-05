@@ -10,7 +10,7 @@ export default class Controller {
         this.model.jump();
     }
 
-    duck() {
+    duck = () => {
         this.model.duck();
     }
 
