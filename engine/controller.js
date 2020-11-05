@@ -9,7 +9,10 @@ export default class Controller {
     jump = () => {
         this.model.jump();
     }
+
     duck() {
         this.model.duck();
     }
+
+    
 }
