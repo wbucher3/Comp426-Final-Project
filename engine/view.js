@@ -25,6 +25,12 @@ export default class View {
          * this loss screen will also display the top 10 leaderboard
          */
 
+         /**ISSUE
+          * the game starts even when it's not appending since the model is made prior 
+          * to getting appending. we need to make it so the model is made when it
+          * is appended to the game page
+          */
+
     }
 
     startGame = () => {

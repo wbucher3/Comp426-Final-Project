@@ -17,20 +17,20 @@ export default class Model {
     constructor() {
 
         // Numbers for determining game and background size based on screen
-        const scaleWidth = screen.width * (7/12) ;
-        const scaleHeight = screen.height * (7/12) ;
-        const piecesWidth = screen.width * (1/14);
-        const piecesHeight = screen.height * (2/14);
+        this.scaleWidth = screen.width * (7/12) ;
+        this.scaleHeight = screen.height * (7/12) ;
+        this.piecesWidth = screen.width * (1/14);
+        this.piecesHeight = screen.height * (2/14);
 
 
         // creates the pixi app 
-        this.app = new PIXI.Application({width: scaleWidth , height: scaleHeight});
+        this.app = new PIXI.Application({width: this.scaleWidth , height: this.scaleHeight});
 
 
         //sets up the background and adds it to the stage
         let background = new PIXI.Sprite.from("../images/background.png");
-        background.height = scaleHeight;
-        background.width = scaleWidth;
+        background.height = this.scaleHeight;
+        background.width = this.scaleWidth;
         this.app.stage.addChild(background);
 
 
@@ -39,13 +39,11 @@ export default class Model {
             sprite: new PIXI.Sprite.from("../images/ram.png"),
             isDead:false, 
         };
-        this.player.sprite.x = 440; //place holder values, i doubt (0,0) will work
-        this.player.sprite.y = 350; 
-        this.player.sprite.width = piecesWidth;
-        this.player.sprite.height = piecesHeight ;
+        this.player.sprite.x = (this.scaleWidth /2) - (this.piecesWidth/2); //always makes ram in center
+        this.player.sprite.y = (this.scaleHeight/2) + (this.piecesHeight/2); 
+        this.player.sprite.width = this.piecesWidth;
+        this.player.sprite.height = this.piecesHeight ;
         this.app.stage.addChild(this.player.sprite);
-
-
 
         //when obstactles are spawned, they are added to this array
         //when they move off the screen, they are removed from this array
@@ -61,15 +59,15 @@ export default class Model {
 
     //moves the user to the left
     left (){
-        if (this.player.sprite.x !== 100) {
-            this.player.sprite.x-= 170 ;
+        if (this.player.sprite.x >= this.scaleWidth * 3/20) {
+            this.player.sprite.x -= (this.piecesWidth * 1.3)  ;
         }
     }
     //moves the user to the right
     right() {
-        if (this.player.sprite.x !== 780){
-            this.player.sprite.x+= 170 ;
-        }
+        if (this.player.sprite.x <= this.scaleWidth * 7/10){
+            this.player.sprite.x += (this.piecesWidth * 1.3) ;
+        }        
     }
 
     //checks to see if an enemy has intersected with the player
