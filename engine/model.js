@@ -2,15 +2,6 @@
 
 // http://pixijs.download/v4.4.0/docs/index.html
 
-/** lane (x, y) from left to right
- * add 170 starting from left to right
- * 1 (100, 350)
- * 2 (270, 350)
- * 3 (440, 350)
- * 4 (510, 350)
- * 5 (780, 350)
- * 
-*/
 
 export default class Model {
  
@@ -67,6 +58,7 @@ export default class Model {
         this.spawnObstacle();
 
         this.listeners = [];
+
     }
 
     // the ticks are started in the view BTW
@@ -80,7 +72,9 @@ export default class Model {
             this.obstacleArray[i].y += this.speed;
         }
 
-        this.collision();
+        //just head and feet collision vs whole body collison
+        this.noseCollision();
+       // this.collision();
 
         
         // this.app.stage.addChild(this.obstacleArray[0])
@@ -119,17 +113,63 @@ export default class Model {
         return this.app;
     }
 
-    //moves the user to the left
+    noseCollision() {
+        for (let i = 0; i < 1 ; i++) {
+            let enemyBounds = this.obstacleArray[i].getBounds();
+            let playerBounds = this.player.sprite.getBounds();
+
+            //scales so the body of the ram is not included in the collision
+            //increase the number to add more of the ram body in hitbox, 1 is whole body
+            let ramNoseHeight = playerBounds.height * 1/2;
+
+            //scales the starting y position and y height of devil
+            //makes it so the hit box is just on the bottom of the devil
+            //decrease the decimal to add more of the body back, 1 is the whole body
+            let devilFeetStart = enemyBounds.y * 1.3
+            let devilFeetHeight = enemyBounds.height - (devilFeetStart - enemyBounds.y) ; 
+
+            //moves the ram's collision box down slightly so there isnt a gap when they hit
+            //if you use the value 1.1, it perfectly stabs the ram in the eyes with the devil feet lol
+            //increase the decimal to move it closer to the ram
+            let newPlayerY = playerBounds.y * 1.03;
+
+
+            //top part is X, bottom part is Y. i added the spacing while testing to quickly change things
+            if (enemyBounds.x + enemyBounds.width > playerBounds.x && 
+                    enemyBounds.x < playerBounds.x + playerBounds.width && 
+
+                    devilFeetStart + devilFeetHeight > newPlayerY && 
+                    devilFeetStart < newPlayerY + ramNoseHeight) {
+                // The comment below this is for the other game idea.
+                // this.updateListener(Model.Event.LOSE);
+
+                this.score += 2;
+                this.removeObstacle();
+                this.spawnObstacle();
+                console.log("Score: " + this.score)
+            }
+        }
+
+    }
+
+    //moves the user to the left if the game is running
     left () {
-        if (this.player.sprite.x >= this.scaleWidth * 3/20) {
-            this.player.sprite.x -= (this.piecesWidth * 1.4);
+        if (!this.lose) {
+            if (this.player.sprite.x >= this.scaleWidth * 3/20  && this.player.sprite !== undefined) {
+                this.player.sprite.x -= (this.piecesWidth * 1.4);
+            }
         }
     }
-    //moves the user to the right
+    //moves the user to the right if the game is running
     right() {
-        if (this.player.sprite.x <= this.scaleWidth * 7/10){
-            this.player.sprite.x += (this.piecesWidth * 1.4) ;
-        }        
+        if (!this.lose) {
+            if (this.player.sprite.x <= this.scaleWidth * 7/10 ){
+                this.player.sprite.x += (this.piecesWidth * 1.4) ;
+            }   
+        }
+        
+        //console.log(this.player.sprite.x + ", " + this.player.sprite.y);
+        //console.log(this.player.sprite.getBounds());
     }
 
     //checks to see if an enemy has intersected with the player
@@ -141,7 +181,7 @@ export default class Model {
         // do some type of listener?
 
         // change 1 to 3 for other game
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 1 ; i++) {
             let enemyBounds = this.obstacleArray[i].getBounds();
             let playerBounds = this.player.sprite.getBounds();
             if (enemyBounds.x + enemyBounds.width > playerBounds.x && 
