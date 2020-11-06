@@ -14,9 +14,9 @@ window.addEventListener('load',() =>   {
     view = new View(model);
     //controller = new Controller(model, view) ;
     
- });
+});
 
- window.addEventListener("keydown", (e)  => {
+window.addEventListener("keydown", (e)  => {
     switch(e.which) {
         case 37: 
         case 65:
@@ -34,5 +34,4 @@ window.addEventListener('load',() =>   {
             return;
     }
     e.preventDefault() ;
- });
-
+});

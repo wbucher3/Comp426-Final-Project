@@ -1,14 +1,15 @@
 /* handle the display of game and webpage */
+import model from "./model.js"
 
 export default class View {
     constructor(model) {
         this.model = model ;        
-        const $root =  document.getElementById("root");
+        this.$root =  document.getElementById("root");
 
         //WANNA GET RID OF LANDING PAGE FOR TESTING???
         //comment out these three lines below!!
         let landing = this.landingPage() ;
-        $root.appendChild(landing) ;
+        this.$root.appendChild(landing) ;
         document.getElementById("start").addEventListener("click", this.startGame);
 
         //THEN
@@ -44,7 +45,17 @@ export default class View {
         page.appendChild(app);
 
         //replaces the landing page with the game
-        document.getElementById("landingPage").replaceWith(page);   
+        document.getElementById("landingPage").replaceWith(page);
+
+        // Starts the ticker
+        this.model.app.ticker.add(delta => this.model.ticks(delta)); 
+    
+        // Shows score and leaderboared page
+        this.model.onLose(game => {
+            this.scorePage();
+            this.model.app.ticker.stop();
+            this.model.app.destroy(true, true);
+        })
     }
 
     landingPage() {
@@ -67,6 +78,70 @@ export default class View {
         content.appendChild(button) ;
         page.appendChild(content);
         return page;
+    }
 
+    // If they make it onto the leaderboad they will enter their
+    // name on this page
+    scorePage() {
+        //creates the overall id tag
+        let page = document.createElement("div");
+        page.setAttribute("id", "scorePage");
+        page.setAttribute("class", "block");
+
+        //first content div tag, everything lives in here
+        let content = document.createElement("form");
+        content.setAttribute("class", "columns is-multiline justify-center");
+ 
+        page.appendChild(content);
+
+        let leftRam = document.createElement("img");
+        leftRam.setAttribute("src", "../images/ram.png");
+        leftRam.setAttribute("class", "column");
+        leftRam.style.background = "black";
+        leftRam.style.margin = "0em 6em 0em";
+
+        content.appendChild(leftRam)
+
+        let field = document.createElement("div");
+        field.setAttribute("class", "field mx-4 column");
+
+        content.appendChild(field);
+
+        let rightRam = document.createElement("img");
+        rightRam.setAttribute("src", "../images/ram.png");
+        rightRam.setAttribute("class", "column");
+        rightRam.style.background = "black";
+        rightRam.style.margin = "0em 6em 0em";
+
+        content.appendChild(rightRam)
+
+        let label = document.createElement("label");
+        label.setAttribute("class", "label title");
+        label.innerHTML = "NAME";
+
+        field.appendChild(label);
+
+        let control = document.createElement("div");
+        control.setAttribute("class", "control");
+
+        field.appendChild(control);
+
+        let input = document.createElement("input");
+        input.setAttribute("class", "input");
+        input.setAttribute("type", "text");
+        input.setAttribute("name", "name")
+
+        control.appendChild(input);
+
+        // Need to actually create the leaderboard
+        let leaderboard = document.createElement("div");
+        leaderboard.innerHTML = "Your final score is " + this.model.score + "! (Future leaderboard location)";
+
+        page.append(leaderboard);
+
+        this.$root.appendChild(page);
+
+        // Replaces the game with the scorePage
+        document.getElementById("game").replaceWith(page);
     }
 }
