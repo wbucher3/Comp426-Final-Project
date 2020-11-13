@@ -1,9 +1,40 @@
 * {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
+    background-color: lightgray;
+    color: #1c7dad;
+}
+.howToTitle{
+    font-size: 50px;
+}
+.mainTitle {
+    font-size: 60px;
+    text-align: center;
+}
+.game {
+    display: flex;
+    justify-content: center;  
+}
+
+li {
+    font-size: 30px;
+}
+
+h1 {
+    color:#1c7dad
+}
+.leaderboard {
+    color:purple;
+    font-size: 40px;
 }
 
 
-h1 {
-    font-size: 60px;
-    text-align: center;
+a:link {
+    color: purple;
+    
+}
+a:visited {
+    color: purple;
+}
+a:hover {
+    text-decoration: underline;
 }
