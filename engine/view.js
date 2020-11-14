@@ -57,6 +57,8 @@ export default class View {
         button.innerHTML = "Start Game!";
 
         let howTo = document.createElement("div") ;
+
+        //i am going to rewrite this using js, i just did the inner HTML to test 
         howTo.innerHTML = `
         <div class="section">
             <div class="columns">
@@ -153,12 +155,17 @@ export default class View {
         playAgain.addEventListener("click", this.tryAgain)
         playAgain.innerHTML = "Play Again? this doesnt work lmao"
 
+        let kanyeQuote = document.createElement("div");
+        kanyeQuote.setAttribute("class", "content");
+        kanyeQuote.innerHTML = "Hard Loss? View a <a href='./inspiration.html'>Kanye West Quote</a> to feel better!";
+
         // Need to actually create the leaderboard
         let leaderboard = document.createElement("div");
         leaderboard.innerHTML = "Your final score is " + this.model.score + "! (Future leaderboard location)";
 
         page.append(leaderboard);
         page.appendChild(playAgain);
+        page.appendChild(kanyeQuote);
         this.$root.appendChild(page);
 
         // Replaces the game with the scorePage
