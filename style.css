@@ -1,14 +1,31 @@
 * {
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+} 
+#wholepage {
     background-color: lightgray;
-    color: #1c7dad;
+
+}
+.page {
+    padding-top: 20px;
+    padding-right: 30px;
+    padding-bottom: 200px;
+    padding-left: 30px;
+}
+.box {
+    background-color: white;
+    color:#25b4fc;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+
 }
 .howToTitle{
-    font-size: 50px;
+    font-size: 30px;
 }
 .mainTitle {
-    font-size: 60px;
+    font-size: 50px;
     text-align: center;
+}
+.yourScore {
+    font-size: 30px;
 }
 .game {
     display: flex;
@@ -16,25 +33,78 @@
 }
 
 li {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 h1 {
-    color:#1c7dad
+    color:#25b4fc
 }
 .leaderboard {
-    color:purple;
-    font-size: 40px;
+    font-size: 30px;
 }
 
-
+a{
+    text-decoration: underline;
+}
 a:link {
-    color: purple;
+    color: darkblue;
     
 }
 a:visited {
-    color: purple;
+    color: rgb(0, 0, 90);
 }
 a:hover {
     text-decoration: underline;
+}
+
+.growButton { 
+    transition: all .2s ease-in-out; 
+}
+.growButton:hover { 
+    transform: scale(1.03); 
+}
+
+
+.startPadding {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 30px;
+    padding-left: 0px;
+}
+
+.boardLinkPadding {
+    padding-top: 10px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
+.howToPadding {
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    padding-left: 15px;
+}
+#start {
+    background-color: #25b4fc ;
+    color:white;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+#playAgain {
+    background-color: #25b4fc ;
+    color:white;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.leftDevil {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+     
+}
+.devilCenter {
+    display: flex;
+    justify-content: center;  
+}
+.table {
+    color:#25b4fc;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }

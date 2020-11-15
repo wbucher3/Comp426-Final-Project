@@ -112,6 +112,9 @@ export default class Model {
     getApp() {
         return this.app;
     }
+    getScore(){
+        return this.score;
+    }
 
     noseCollision() {
         for (let i = 0; i < 1 ; i++) {
