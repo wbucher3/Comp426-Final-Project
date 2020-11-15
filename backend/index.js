@@ -25,10 +25,6 @@ const loginData = require('data-store')({path: process.cwd() + '/data/users.json
 
 
 app.post('/login', (req,res) => {
-   // let user = req.body.user;
-    //let password = req.body.password;
-
-    console.log(req.body);
 
     let {user, password} = req.body
     
@@ -39,7 +35,6 @@ app.post('/login', (req,res) => {
         return;
     } 
     if (user_data.password == password) {
-        console.log("User "+ user + " Credentials Valid");
         req.session.user = user;
         res.json(true);
         return;
