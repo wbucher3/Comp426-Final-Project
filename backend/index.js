@@ -5,28 +5,101 @@ const app = express();
 
 const Score = require('./score.js');
 
+//cookies use express session
+const expressSession = require('express-session');
+
+app.use(expressSession({
+    name: "GameSessionCookie",
+    secret:"secret phrase",
+    resave: false,
+    saveUninitialized: false
+}));
+
+
 const bodyParser = require('body-parser');
+
 app.use(bodyParser.json());
 
+//storage of user/passwords
+const loginData = require('data-store')({path: process.cwd() + '/data/users.json'});
+
+
+app.post('/login', (req,res) => {
+   // let user = req.body.user;
+    //let password = req.body.password;
+
+    console.log(req.body);
+
+    let {user, password} = req.body
+    
+    let user_data = loginData.get(user);
+
+    if (user_data == null) {
+        res.status(404).send("Not Found");
+        return;
+    } 
+    if (user_data.password == password) {
+        console.log("User "+ user + " Credentials Valid");
+        req.session.user = user;
+        res.json(true);
+        return;
+    }
+    res.status(403).send("Password Wrong")
+});
+
+app.get('/logout', (req, res) => {
+    delete req.session.user;
+    res.json(true);
+});
+
+
+
+
 app.get('/score', (req, res) => {
-    res.json(Score.getAllIDs());
+    //ensures someone is logged in
+    if (req.session.user == undefined) {
+        res.status(403).send("Unauthorized");
+    }
+
+    res.json(Score.getAllIDsForUser(req.session.user));
     return;
 });
 
 app.get('/score/:id', (req, res) => {
+    //ensures someone is logged in
+    if (req.session.user == undefined) {
+        res.status(403).send("Unauthorized");
+    }
+
+
     let s = Score.findByID(req.params.id);
+
     if (s == null) {
         res.status(404).send("User not found");
+        return;
+    }
+    
+    //only get the id of yourself
+    if (s.owner != req.session.user) {
+        res.status(403).send("Unauthorized");
         return;
     }
     res.json(s);
 });
 
 app.post('/score', (req, res) => {
+
+    //ensures someone is logged in
+    if (req.session.user == undefined) {
+        res.status(403).send("Unauthorized");
+    }
+
+
     let {user, score} = req.body
     // TODO : add checks with like 400 or 500 errors to make sure everything is good
 
-    let s = Score.create(user, score);
+    //user now comes from the login to prevent them from posting to other users
+    let s = Score.create(req.session.user , score);
     if (s == null) {
         res.status(400).send("Bad Request");
         return;
@@ -35,9 +108,20 @@ app.post('/score', (req, res) => {
 });
 
 app.put('/score/:id', (req, res) => {
+
+    //ensures someone is logged in
+    if (req.session.user == undefined) {
+        res.status(403).send("Unauthorized");
+    }
+
     let s = Score.findByID(req.params.id);
     if (s == null) {
         res.status(404).send("User not found");
+        return;
+    }
+    //only update the score of yourself
+    if (s.owner != req.session.user) {
+        res.status(403).send("Unauthorized");
         return;
     }
 
@@ -51,11 +135,24 @@ app.put('/score/:id', (req, res) => {
 ;})
 
 app.delete('/score/:id', (req, res) => {
+
+    //ensures someone is logged in
+    if (req.session.user == undefined) {
+        res.status(403).send("Unauthorized");
+    }
+
     let s = Score.findByID(req.params.id);
+    
     if (s == null) {
         res.status(404).send("User not found");
         return;
     }
+    //only delete the score of yourself
+    if (s.owner != req.session.user) {
+        res.status(403).send("Unauthorized");
+        return;
+    }
+
     s.delete();
     
     res.json(true);

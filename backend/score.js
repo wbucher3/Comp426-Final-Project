@@ -22,6 +22,10 @@ Score.getAllIDs = () => {
     return Object.keys(scoreData.data).map((id => {return parseInt(id);}));
 };
 
+Score.getAllIDsForUser = (user) => {
+    return Object.keys(scoreData.data).filter((id) => scoreData.get(id).user == user).map((id => {return parseInt(id);}));
+}
+
 Score.findByID = (id) => {
     let sdata = scoreData.get(id);
     if (sdata != null) {
