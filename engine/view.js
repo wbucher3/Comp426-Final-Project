@@ -46,7 +46,7 @@ export default class View {
          //VARIABLE FOR TESTING
          //
          //
-        let signedIn = false ; 
+        let signedIn = true ; 
         
         if (signedIn) {
             //this div gets the spacing right
