@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 //storage of user/passwords
 const loginData = require('data-store')({path: process.cwd() + '/data/users.json'});
 
+const PORT = process.env.PORT||'3030';
 
 app.post('/login', (req,res) => {
 
@@ -159,6 +160,6 @@ app.delete('/score/:id', (req, res) => {
 // heroku has an evironment varibale that will have a port number
 
  
-app.listen(port, () => {
-    console.log("Score up and running on port " + port);
+app.listen(PORT, () => {
+    console.log("Score up and running on port " + PORT);
 })
