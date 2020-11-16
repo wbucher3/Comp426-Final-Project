@@ -73,7 +73,7 @@ const renderContent = function() {
 }   
 
 const handleLogin = function() {
-
+        
 }
 
 const handleSignUp = function() {

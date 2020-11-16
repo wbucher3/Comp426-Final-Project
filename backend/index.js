@@ -58,7 +58,6 @@ app.get('/allScores', (req, res) => {
 
 
 
-
 app.get('/score', (req, res) => {
     res.json(Score.getAllIDs());
     return;
