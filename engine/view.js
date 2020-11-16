@@ -11,16 +11,82 @@ export default class View {
 
     }
 
+    renderScore() {
+        let score = this.model.getScore(); 
+        let miss = this.model.getMisses();
+        let speed = this.model.getSpeed();
+
+        let gameInfoDiv = document.createElement("div");
+        gameInfoDiv.setAttribute("id", "currentScore");
+        
+        let scoreText = document.createElement("h2");
+        scoreText.setAttribute("class", "scoreText");
+        scoreText.innerText = "Score: " + score
+
+
+        let speedText = document.createElement("h2");
+        speedText.setAttribute("class", "scoreText");
+        speedText.innerText = "Speed: " + Math.floor(speed);
+
+        let livesLeft = document.createElement("h2");
+        livesLeft.setAttribute("class", "scoreText");
+        livesLeft.innerText = "Lives Left: " + (3 - miss);
+
+        gameInfoDiv.appendChild(scoreText);
+        gameInfoDiv.appendChild(livesLeft);
+        gameInfoDiv.appendChild(speedText);
+
+        return gameInfoDiv;
+
+    }
+
+
     startGame = () => {
         //overall id tag
+        let app = this.model.getApp().view ;
+
         let page = document.createElement("article");
         page.setAttribute("id", "game");
         page.setAttribute("class", "game")
 
-        //gets the app from the model
-        //must be an arrow function or this will cause undefined errors
-        let app = this.model.getApp().view ;
-        page.appendChild(app);
+        let columnDiv = document.createElement("div");
+        columnDiv.setAttribute("class", "columns");
+
+        // let leftcol = document.createElement("div");
+        // leftcol.setAttribute("class", "column");
+        // let leftBox = document.createElement("div");
+        // leftBox.setAttribute("class", "box scoreBox");
+        // leftBox.innerText = "thank you for playing!"
+        // leftcol.appendChild(leftBox);
+        
+        let centerCol = document.createElement("div");
+        centerCol.setAttribute("class", "column is-four-fifths is-fullwidth")
+        let gameDiv = document.createElement("div");
+        gameDiv.setAttribute("class", "column"); 
+        gameDiv.appendChild(app);
+        centerCol.appendChild(gameDiv);
+
+
+        let rightcol = document.createElement("div");
+        rightcol.setAttribute("class", "column");
+
+        let scoreBoxPosition = document.createElement("div");
+        scoreBoxPosition.setAttribute("class", "scorePadding")
+
+        let scoreBox = document.createElement("div");
+        scoreBox.setAttribute("class", "box");
+
+        
+        scoreBox.appendChild(this.renderScore());
+        scoreBoxPosition.appendChild(scoreBox);
+        rightcol.appendChild(scoreBoxPosition);
+
+
+        //columnDiv.appendChild(leftcol);
+        columnDiv.appendChild(centerCol);
+        columnDiv.appendChild(rightcol); 
+
+        page.appendChild(columnDiv);
 
         //replaces the landing page with the game
         document.getElementById("landingPage").replaceWith(page);
@@ -35,8 +101,20 @@ export default class View {
             this.model.app.destroy(true, true);
         })
 
+        this.model.onHit(game => {
+            let score = this.model.getScore();
+            let miss = this.model.getMisses();
+            document.getElementById("currentScore").replaceWith(this.renderScore())
+        })
+        this.model.onMiss(game => {
+            let score = this.model.getScore();
+            let miss = this.model.getMisses();
+            document.getElementById("currentScore").replaceWith(this.renderScore())
+        })
+
     }
 
+   
     landingPage() {
         //overall id tag with div that holds everything. used to replace things
         let content = document.createElement("div") ;
@@ -77,7 +155,7 @@ export default class View {
             button1.setAttribute("class", "button is-large is-fullwidth growButton");
             button1.setAttribute("id", "start");
             button1.innerHTML = "Make an Account";
-            button1.addEventListener("click", this.startGame);
+            button1.addEventListener("click", this.loadLoginPage);
 
             leftSpace.appendChild(button1);
             dosButtons.appendChild(leftSpace);
@@ -89,7 +167,7 @@ export default class View {
             button2.setAttribute("class", "button is-large is-fullwidth growButton");
             button2.setAttribute("id", "start");
             button2.innerHTML = "Sign into your Account";
-            button2.addEventListener("click", this.startGame);
+            button2.addEventListener("click", this.loadLoginPage);
 
             rightSpace.appendChild(button2);
             dosButtons.appendChild(rightSpace);
@@ -268,6 +346,10 @@ export default class View {
 
     tryAgain() {
         location.reload();
+    }
+
+    loadLoginPage(){
+        location.href = "../login.html"
     }
     
 }

@@ -73,7 +73,14 @@ export default class Model {
         }
 
         //just head and feet collision vs whole body collison
-        this.noseCollision();
+        if (this.noseCollision()) {
+            //anything above 10.5 is really hard lmao
+            if (this.speed <= 10.5) {
+                this.speed = this.speed * 1.02;
+                console.log(this.speed);
+            }
+            
+        }
        // this.collision();
 
         
@@ -84,14 +91,15 @@ export default class Model {
             this.removeObstacle();
             this.spawnObstacle();
             this.passed++;
-            console.log("Passed: " + this.passed);
+            this.updateListener(Model.Event.MISS);
+            
 
             if (this.passed == 3) {
                 this.updateListener(Model.Event.LOSE);
                 this.lose = true;
             }
         }
-
+        /*
         if (this.score == 20) {
             this.speed = 6
         } else if (this.score == 100) {
@@ -101,6 +109,8 @@ export default class Model {
         } else if (this.score == 300) {
             this.speed = 10;
         }
+        */
+       
     }
 
     // helper method for ticks method
@@ -114,6 +124,12 @@ export default class Model {
     }
     getScore(){
         return this.score;
+    }
+    getMisses(){
+        return this.passed;
+    }
+    getSpeed() {
+        return this.speed;
     }
 
     noseCollision() {
@@ -140,17 +156,19 @@ export default class Model {
             //top part is X, bottom part is Y. i added the spacing while testing to quickly change things
             if (enemyBounds.x + enemyBounds.width > playerBounds.x && 
                     enemyBounds.x < playerBounds.x + playerBounds.width && 
-
                     devilFeetStart + devilFeetHeight > newPlayerY && 
                     devilFeetStart < newPlayerY + ramNoseHeight) {
                 // The comment below this is for the other game idea.
                 // this.updateListener(Model.Event.LOSE);
 
+                
                 this.score += 2;
                 this.removeObstacle();
                 this.spawnObstacle();
-                console.log("Score: " + this.score)
+                this.updateListener(Model.Event.HIT);
+                return true;
             }
+            return false;
         }
 
     }
@@ -210,6 +228,21 @@ export default class Model {
             func: callback
         })
     }
+
+    onHit(callback) {
+        this.addListener({
+            event: Model.Event.HIT,
+            func: callback
+        })
+    }
+    onMiss(callback) {
+        this.addListener({
+            event: Model.Event.MISS,
+            func: callback
+        })
+    }
+    
+    
 
     spawnObstacle() {
         // for other game idea change 1 to 3
@@ -377,5 +410,7 @@ class Obstacle {
 
 
 Model.Event = {
-    LOSE: 1
+    LOSE: 1,
+    HIT: 2,
+    MISS: 3
 }

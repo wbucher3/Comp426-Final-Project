@@ -94,6 +94,16 @@ a:hover {
     color:white;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
+#signUp {
+    background-color: #25b4fc ;
+    color:white;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+#login {
+    background-color: #25b4fc ;
+    color:white;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
 
 .leftDevil {
     -webkit-transform: scaleX(-1);
@@ -107,4 +117,46 @@ a:hover {
 .table {
     color:#25b4fc;
     font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.loginLabels {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+
+}
+.loginPadding {
+    padding-top: 30px;
+    padding-right: 220px;
+    padding-bottom: 40px;
+    padding-left: 220px;
+}
+.loginContentPadding {
+    padding-top: 20px;
+    padding-right: 70px;
+    padding-bottom: 0px;
+    padding-left: 70px;
+}
+.scorePadding {
+    padding-top: 40px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    padding-left: 15px; 
+}
+.scoreBox {
+    padding-top: 20px;
+    padding-right: 80px;
+    padding-bottom: 20px;
+    padding-left: 80px;  
+}
+.gamePadding {
+    padding-top: 20px;
+    padding-right: 70px;
+    padding-bottom: 1px;
+    padding-left: 70px;
+}
+.scoreText {
+    font-size: 20px;
+    box-sizing: content-box;
+    width: 100%;
+    padding: 5px;
 }
