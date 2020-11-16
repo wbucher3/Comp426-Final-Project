@@ -3,7 +3,7 @@ export const getAllScores = async function() {
         const result = await axios({
             method: 'get',
             url: 'https://comp426projectbackend.herokuapp.com/allScores',
-            withCredentials: true
+            //withCredentials: true
         });
         return result;
 
@@ -24,22 +24,6 @@ export const login = async function(username, givenPassword) {
                 user: username,
                 password: givenPassword,
             },
-            withCredentials: true
-        });
-        return result;
-
-    } catch (error) {
-        return error;
-    }
-    
-}
-
-export const isLoggedIn = async function() {
-    try {
-        const result = await axios({
-            method: 'get',
-            //url: 'https://comp426projectbackend.herokuapp.com/isLogged',
-            url: 'http://localhost:3030/isLogged',
             //withCredentials: true
         });
         return result;
@@ -50,12 +34,12 @@ export const isLoggedIn = async function() {
     
 }
 
-export const bootUp = async function() {
+export const getName = async function() {
     try {
         const result = await axios({
             method: 'get',
-            url: 'https://comp426projectbackend.herokuapp.com/',
-            //url: 'http://localhost:3030/isLogged',
+            //url: 'https://comp426projectbackend.herokuapp.com/user',
+            url: 'http://localhost:3030/user',
             //withCredentials: true
         });
         return result;

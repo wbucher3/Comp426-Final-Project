@@ -82,10 +82,7 @@ const handleLogin = async function() {
     console.log(result);
     if (result.data == true) {
 
-        // location.href = "./index.html"
-
-        setTimeout(() => {  location.href = "./index.html" }, 5000);
-
+        location.href = "./game.html"
     }
 }
 

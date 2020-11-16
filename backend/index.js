@@ -13,10 +13,10 @@ app.use(expressSession({
     secret:"secret phrase",
     resave: false,
     saveUninitialized: false,
-    cookie: {
-        sameSite:'none',
-        expires: 6000000
-    }
+    // cookie: {
+    //     sameSite:'none',
+    //     expires: 6000000
+    // }
 }));
 
 let cors = require('cors')
@@ -24,7 +24,6 @@ let cors = require('cors')
 app.use(cors());
 
 const bodyParser = require('body-parser');
-
 app.use(bodyParser.json());
 
 //storage of user/passwords
@@ -33,7 +32,7 @@ const loginData = require('data-store')({path: process.cwd() + '/data/users.json
 const PORT = process.env.PORT||'3030';
 
 app.get('/', function(req, res) {
-	response.sendFile(path.join('../login.html'));
+	res.sendFile(path.join('../login.html'));
 });
 
 app.post('/login', (req,res) => {
@@ -48,9 +47,8 @@ app.post('/login', (req,res) => {
     } 
     if (user_data.password == password) {
         
-        request.session.loggedin = true;
+        req.session.loggedin = true;
         req.session.user = user;
-        response.redirect('/game');
 
         res.json(true);
         return;
@@ -59,6 +57,11 @@ app.post('/login', (req,res) => {
 
     
 });
+
+app.get('/user', (req, res) => {
+    let username = req.session.user + "";
+    res.json(username);
+})
 
 app.get('/logout', (req, res) => {
     delete req.session.user;
@@ -71,7 +74,9 @@ app.get('/allScores', (req, res) => {
 });
 
 app.get('/game', (req,res) => {
-    response.sendFile(path.join('../game.html'));
+    if (req.session.loggedin) {
+        res.sendFile(path.join('../game.html'));
+    }
 });
 
 

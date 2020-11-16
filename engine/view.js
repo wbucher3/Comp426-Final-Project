@@ -1,5 +1,5 @@
 /* handle the display of game and webpage */
-import {getAllScores, isLoggedIn} from "../APIcalls.js" 
+import {getAllScores, getName} from "../APIcalls.js" 
 
 export default class View {
     constructor(model) {
@@ -110,10 +110,11 @@ export default class View {
 
     }
 
-    async areyousignedin() {
-        let signedIn = await isLoggedIn() ; 
-        signedIn = signedIn.data;
-        return signedIn;
+    async getUsername() {
+        let name = await getName() ; 
+        console.log(name);
+        name = name.data;
+        return name;
     }
 
     async landingPage() {
@@ -128,6 +129,9 @@ export default class View {
         // let signedIn = await this.areyousignedin()
         // console.log(signedIn);
         let signedIn = true;
+        let username = await this.getUsername();
+        console.log(username);
+
         if (signedIn) {
             //this div gets the spacing right
             let buttonDiv = document.createElement("div");
@@ -136,7 +140,7 @@ export default class View {
             let button = document.createElement("button");
             button.setAttribute("class", "button is-large is-fullwidth growButton ");
             button.setAttribute("id", "start");
-            button.innerHTML = "Welcome back, {username}, Ready to Play?";
+            button.innerHTML = "Welcome back, " + username + ", Ready to Play?";
             button.addEventListener("click", this.startGame);
 
             //adds button to main page
