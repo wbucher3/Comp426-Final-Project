@@ -9,6 +9,9 @@
  */
 
 //gets the data from the backend
+
+import {getAllScores} from "./APIcalls.js" 
+
 const getData = function() {
     //return an array of data objects 
 }
@@ -41,10 +44,11 @@ const renderTable = function(data) {
  
 
 //loads everything in
-const domLoader = function() {
+const domLoader = async function() {
     let $root = document.getElementById("root") ; 
-    let dataArray = getData() ;
-    let table = renderTable(dataArray) ;
+    let dataArray = await getAllScores(); 
+    console.log(dataArray);
+  //  let table = renderTable(dataArray.body) ;
 }
 //kicks off the webpage
 domLoader();
