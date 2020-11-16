@@ -12,7 +12,11 @@ app.use(expressSession({
     name: "GameSessionCookie",
     secret:"secret phrase",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        sameSite:'none',
+        expires: 6000000
+    }
 }));
 
 let cors = require('cors')
@@ -40,6 +44,7 @@ app.post('/login', (req,res) => {
     } 
     if (user_data.password == password) {
         req.session.user = user;
+        req.session.save;
         res.json(true);
         return;
     }

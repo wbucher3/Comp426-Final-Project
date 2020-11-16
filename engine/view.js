@@ -109,13 +109,13 @@ export default class View {
         })
 
     }
+
     async areyousignedin() {
         let signedIn = await isLoggedIn() ; 
         signedIn = signedIn.data;
         return signedIn;
     }
 
-   
     async landingPage() {
         //overall id tag with div that holds everything. used to replace things
         let content = document.createElement("div") ;
@@ -126,7 +126,7 @@ export default class View {
          //
          //
         let signedIn = await this.areyousignedin()
-        
+        console.log(signedIn);
         if (signedIn) {
             //this div gets the spacing right
             let buttonDiv = document.createElement("div");
@@ -215,13 +215,11 @@ export default class View {
 
         //adds all contents to one item and returns the item
         content.appendChild(lowerBox);
-        this.$root =  document.getElementById("root");
+        this.$root = document.getElementById("root");
         this.$root.appendChild(content) ;
         return;
     }
 
-    // If they make it onto the leaderboad they will enter their
-    // name on this page
     async scorePage() {
         //for testing view of the score board
         let data = await getAllScores();
@@ -356,10 +354,11 @@ export default class View {
 
     tryAgain() {
         location.reload();
-    }
-
+    }; 
+    
     loadLoginPage(){
         location.href = "../login.html"
+     
     }
     
 }

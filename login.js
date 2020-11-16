@@ -79,8 +79,12 @@ const handleLogin = async function() {
     let password = document.getElementById("passwordField").value ;
     console.log( username + " " + password);
     let result = await login(username, password);
-    if (result == true) {
-        location.href = "./index.html"
+    console.log(result);
+    if (result.data == true) {
+
+        // location.href = "./index.html"
+
+        setTimeout(() => {  location.href = "./index.html" }, 5000);
 
     }
 }
