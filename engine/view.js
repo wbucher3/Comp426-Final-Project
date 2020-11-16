@@ -112,7 +112,6 @@ export default class View {
 
     async getUsername() {
         let name = await getName() ; 
-        console.log(name);
         name = name.data;
         return name;
     }
@@ -130,7 +129,6 @@ export default class View {
         // console.log(signedIn);
         let signedIn = true;
         let username = await this.getUsername();
-        console.log(username);
 
         if (signedIn) {
             //this div gets the spacing right

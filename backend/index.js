@@ -31,10 +31,6 @@ const loginData = require('data-store')({path: process.cwd() + '/data/users.json
 
 const PORT = process.env.PORT||'3030';
 
-app.get('/', function(req, res) {
-	res.sendFile(path.join('../login.html'));
-});
-
 app.post('/login', (req,res) => {
 
     let {user, password} = req.body
@@ -59,8 +55,10 @@ app.post('/login', (req,res) => {
 });
 
 app.get('/user', (req, res) => {
+
     let username = req.session.user + "";
     res.json(username);
+    return;
 })
 
 app.get('/logout', (req, res) => {

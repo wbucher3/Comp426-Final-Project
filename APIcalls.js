@@ -19,12 +19,11 @@ export const login = async function(username, givenPassword) {
             method: 'post',
             url: 'https://comp426projectbackend.herokuapp.com/login',
             //url: 'http://localhost:3030/login',
-
             data: {
                 user: username,
                 password: givenPassword,
             },
-            //withCredentials: true
+            withCredentials: true
         });
         return result;
 
