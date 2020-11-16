@@ -3,7 +3,7 @@ export const getAllScores = async function() {
         const result = await axios({
             method: 'get',
             url: 'https://comp426projectbackend.herokuapp.com/allScores',
-            //withCredentials: true
+            withCredentials: true
         });
         return result;
 
@@ -40,7 +40,7 @@ export const getName = async function() {
             method: 'get',
             url: 'https://comp426projectbackend.herokuapp.com/user',
             //url: 'http://localhost:3030/user',
-            //withCredentials: true
+            withCredentials: true
         });
         return result;
 
