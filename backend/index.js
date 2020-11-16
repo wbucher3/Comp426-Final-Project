@@ -54,7 +54,14 @@ app.get('/logout', (req, res) => {
 app.get('/allScores', (req, res) => {
     res.json(Score.getAllScores());
     return;
-})
+});
+
+app.get('/isLogged', (req,res) => {
+    if (req.session.user == undefined) {
+        res.status(403).send("Unauthorized");
+    }
+    return res.json(true);
+});
 
 
 

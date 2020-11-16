@@ -1,5 +1,5 @@
 /* handle the display of game and webpage */
-import {getAllScores} from "../APIcalls.js" 
+import {getAllScores, isLoggedIn} from "../APIcalls.js" 
 
 export default class View {
     constructor(model) {
@@ -125,7 +125,7 @@ export default class View {
          //VARIABLE FOR TESTING
          //
          //
-        let signedIn = true ; 
+        let signedIn = await isLoggedIn() ; 
         
         if (signedIn) {
             //this div gets the spacing right

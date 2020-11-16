@@ -1,3 +1,5 @@
+import {login} from './APIcalls.js'
+
 const renderContent = function() {
     let whole = document.createElement("div");
     whole.setAttribute("class", "loginPadding");
@@ -72,8 +74,15 @@ const renderContent = function() {
     return whole;
 }   
 
-const handleLogin = function() {
-        
+const handleLogin = async function() {
+    let username = document.getElementById("usernameField").value;
+    let password = document.getElementById("passwordField").value ;
+    console.log( username + " " + password);
+    let result = await login(username, password);
+    if (result == true) {
+        location.href = "./index.html"
+
+    }
 }
 
 const handleSignUp = function() {
