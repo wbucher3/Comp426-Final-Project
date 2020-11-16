@@ -35,7 +35,7 @@ export const login = async function(username, givenPassword) {
 export const isLoggedIn = async function() {
     try {
         const result = await axios({
-            method: 'post',
+            method: 'get',
             url: 'https://comp426projectbackend.herokuapp.com/isLogged',
             
            // withCredentials: true

@@ -116,7 +116,7 @@ export default class View {
     }
 
    
-    landingPage() {
+    async landingPage() {
         //overall id tag with div that holds everything. used to replace things
         let content = document.createElement("div") ;
         content.setAttribute("id", "landingPage");
