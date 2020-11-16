@@ -77,7 +77,6 @@ export default class Model {
             //anything above 10.5 is really hard lmao
             if (this.speed <= 10.5) {
                 this.speed = this.speed * 1.02;
-                console.log(this.speed);
             }
             
         }

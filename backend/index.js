@@ -58,7 +58,7 @@ app.get('/allScores', (req, res) => {
 
 app.get('/isLogged', (req,res) => {
     if (req.session.user == undefined) {
-        res.status(403).send("Unauthorized");
+        res.json(false);
     }
     return res.json(true);
 });

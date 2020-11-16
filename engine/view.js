@@ -4,12 +4,7 @@ import {getAllScores, isLoggedIn} from "../APIcalls.js"
 export default class View {
     constructor(model) {
         this.model = model ;        
-        this.$root =  document.getElementById("root");
-
-        let landing = this.landingPage() ;
-        this.$root.appendChild(landing) ;
-
-
+        this.landingPage() ;
     }
 
     renderScore() {
@@ -114,6 +109,11 @@ export default class View {
         })
 
     }
+    async areyousignedin() {
+        let signedIn = await isLoggedIn() ; 
+        signedIn = signedIn.data;
+        return signedIn;
+    }
 
    
     async landingPage() {
@@ -125,7 +125,7 @@ export default class View {
          //VARIABLE FOR TESTING
          //
          //
-        let signedIn = await isLoggedIn() ; 
+        let signedIn = await this.areyousignedin()
         
         if (signedIn) {
             //this div gets the spacing right
@@ -215,8 +215,9 @@ export default class View {
 
         //adds all contents to one item and returns the item
         content.appendChild(lowerBox);
-
-        return content;
+        this.$root =  document.getElementById("root");
+        this.$root.appendChild(content) ;
+        return;
     }
 
     // If they make it onto the leaderboad they will enter their
