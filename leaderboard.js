@@ -24,7 +24,7 @@ const renderTable = function(data) {
 
     let table = document.createElement("table"); 
 
-    for (let i = 0 ; i < 50 ; i++) {
+    for (let i = 0 ; i < 10 ; i++) {
         let overall = document.createElement("tr");
 
         let name = document.createElement("td");

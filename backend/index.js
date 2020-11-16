@@ -157,7 +157,7 @@ app.delete('/score/:id', (req, res) => {
 });
 
 // heroku has an evironment varibale that will have a port number
-const port = 3030;
+//const port = 3030;
 
 app.listen(port, () => {
     console.log("Score up and running on port " + port);

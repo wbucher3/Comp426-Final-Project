@@ -313,6 +313,7 @@ export default class View {
          * make sure the data is sorted starting with the
          * largest value
          */
+        console.log(data);
         let temp = "";
         for (let i = 0 ; i < data.length ; i++) {
             let name = data[i].user;
