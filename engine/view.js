@@ -1,4 +1,5 @@
 /* handle the display of game and webpage */
+import {getAllScores} from "../APIcalls.js" 
 
 export default class View {
     constructor(model) {
@@ -220,30 +221,32 @@ export default class View {
 
     // If they make it onto the leaderboad they will enter their
     // name on this page
-    scorePage() {
+    async scorePage() {
         //for testing view of the score board
-        let data = [
-            {
-                username: "DrJazzy",
-                score: 420
-            },
-            {
-                username: "LazyCow",
-                score: 419
-            },
-            {
-                username: "PogChamp420",
-                score: 365
-            },
-            {
-                username: "poopyhead",
-                score:  204
-            },
-            {
-                username: "imBad",
-                score: 3
-            }
-        ];
+        let data = await getAllScores();
+        data = data.data;
+        // let data = [
+        //     {
+        //         username: "DrJazzy",
+        //         score: 420
+        //     },
+        //     {
+        //         username: "LazyCow",
+        //         score: 419
+        //     },
+        //     {
+        //         username: "PogChamp420",
+        //         score: 365
+        //     },
+        //     {
+        //         username: "poopyhead",
+        //         score:  204
+        //     },
+        //     {
+        //         username: "imBad",
+        //         score: 3
+        //     }
+        // ];
         //creates the overall id tag
         let page = document.createElement("div");
         page.setAttribute("id", "scorePage");
@@ -305,9 +308,14 @@ export default class View {
         leaderTable.setAttribute("class", "table is-fullwidth is-hoverable"); 
 
         //will the array be pre-sorted?
+        /**TODO 
+         * change for loop to a length of 5
+         * make sure the data is sorted starting with the
+         * largest value
+         */
         let temp = "";
-        for (let i = 0 ; i < 5 ; i++) {
-            let name = data[i].username;
+        for (let i = 0 ; i < data.length ; i++) {
+            let name = data[i].user;
             let score = data[i].score;
 
             temp = temp + '<tr> <td>'+name+'</td><td>'+score+'</td></tr>';

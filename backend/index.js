@@ -15,6 +15,9 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 
+let cors = require('cors')
+
+app.use(cors())
 
 const bodyParser = require('body-parser');
 
@@ -47,16 +50,16 @@ app.get('/logout', (req, res) => {
     res.json(true);
 });
 
+app.get('/allScores', (req, res) => {
+    res.json(Score.getAllScores());
+    return;
+})
+
 
 
 
 app.get('/score', (req, res) => {
-    //ensures someone is logged in
-    if (req.session.user == undefined) {
-        res.status(403).send("Unauthorized");
-    }
-
-    res.json(Score.getAllIDsForUser(req.session.user));
+    res.json(Score.getAllIDs());
     return;
 });
 
