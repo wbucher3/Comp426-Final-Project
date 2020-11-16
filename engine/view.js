@@ -125,8 +125,9 @@ export default class View {
          //VARIABLE FOR TESTING
          //
          //
-        let signedIn = await this.areyousignedin()
-        console.log(signedIn);
+        // let signedIn = await this.areyousignedin()
+        // console.log(signedIn);
+        let signedIn = true;
         if (signedIn) {
             //this div gets the spacing right
             let buttonDiv = document.createElement("div");

@@ -21,7 +21,7 @@ app.use(expressSession({
 
 let cors = require('cors')
 
-app.use(cors())
+app.use(cors());
 
 const bodyParser = require('body-parser');
 
@@ -32,6 +32,10 @@ const loginData = require('data-store')({path: process.cwd() + '/data/users.json
 
 const PORT = process.env.PORT||'3030';
 
+app.get('/', function(req, res) {
+	response.sendFile(path.join('../login.html'));
+});
+
 app.post('/login', (req,res) => {
 
     let {user, password} = req.body
@@ -39,16 +43,21 @@ app.post('/login', (req,res) => {
     let user_data = loginData.get(user);
 
     if (user_data == null) {
-        res.status(404).send("Not Found");
+        res.status(404).send("Account Not Found");
         return;
     } 
     if (user_data.password == password) {
+        
+        request.session.loggedin = true;
         req.session.user = user;
-        req.session.save;
+        response.redirect('/game');
+
         res.json(true);
         return;
     }
     res.status(403).send("Password Wrong")
+
+    
 });
 
 app.get('/logout', (req, res) => {
@@ -61,11 +70,8 @@ app.get('/allScores', (req, res) => {
     return;
 });
 
-app.get('/isLogged', (req,res) => {
-    if (req.session.user == undefined) {
-        res.json(false);
-    }
-    return res.json(true);
+app.get('/game', (req,res) => {
+    response.sendFile(path.join('../game.html'));
 });
 
 
