@@ -79,9 +79,9 @@ const handleLogin = async function() {
     let password = document.getElementById("passwordField").value ;
     console.log( username + " " + password);
     let result = await login(username, password);
-    console.log(result);
-    if (result.data == true) {
 
+    if (result.data == true) {
+        
         location.href = "./game.html"
     }
 }
