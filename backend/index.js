@@ -19,9 +19,13 @@ app.use(expressSession({
     // }
 }));
 
-let cors = require('cors')
+let cors = require('cors');
 
-app.use(cors());
+const corsConfig = {
+    origin: 'http://localhost:3000',
+    credentials: true
+}
+app.use(cors(corsConfig));
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
