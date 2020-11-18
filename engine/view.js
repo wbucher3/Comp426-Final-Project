@@ -121,65 +121,25 @@ export default class View {
         let content = document.createElement("div") ;
         content.setAttribute("id", "landingPage");
 
-         //start button or sign in/up buttons
-         //VARIABLE FOR TESTING
-         //
-         //
-        // let signedIn = await this.areyousignedin()
-        // console.log(signedIn);
-        let signedIn = true;
+
         let username = await this.getUsername();
 
-        if (signedIn) {
-            //this div gets the spacing right
-            let buttonDiv = document.createElement("div");
-            buttonDiv.setAttribute("class", "startPadding")
 
-            let button = document.createElement("button");
-            button.setAttribute("class", "button is-large is-fullwidth growButton ");
-            button.setAttribute("id", "start");
-            button.innerHTML = "Welcome back, " + username + ", Ready to Play?";
-            button.addEventListener("click", this.startGame);
+        //this div gets the spacing right
+        let buttonDiv = document.createElement("div");
+        buttonDiv.setAttribute("class", "startPadding")
 
-            //adds button to main page
-            buttonDiv.appendChild(button)
-            content.appendChild(buttonDiv) ;
-        } else {
-            //this div gets spacing right
-            let buttonsDiv = document.createElement("div");
-            buttonsDiv.setAttribute("class", "startPadding");
+        let button = document.createElement("button");
+        button.setAttribute("class", "button is-large is-fullwidth growButton ");
+        button.setAttribute("id", "start");
+        button.innerHTML = "Welcome back, " + username + ", Ready to Play?";
+        button.addEventListener("click", this.startGame);
 
-            let dosButtons = document.createElement("div");
-            dosButtons.setAttribute("class", "columns");
+        //adds button to main page
+        buttonDiv.appendChild(button)
+        content.appendChild(buttonDiv) ;
 
-            let leftSpace = document.createElement("div");
-            leftSpace.setAttribute("class", "column");
-
-            let button1 = document.createElement("button");
-            button1.setAttribute("class", "button is-large is-fullwidth growButton");
-            button1.setAttribute("id", "start");
-            button1.innerHTML = "Make an Account";
-            button1.addEventListener("click", this.loadLoginPage);
-
-            leftSpace.appendChild(button1);
-            dosButtons.appendChild(leftSpace);
-
-            let rightSpace = document.createElement("div");
-            rightSpace.setAttribute("class", "column");
-
-            let button2 = document.createElement("button");
-            button2.setAttribute("class", "button is-large is-fullwidth growButton");
-            button2.setAttribute("id", "start");
-            button2.innerHTML = "Sign into your Account";
-            button2.addEventListener("click", this.loadLoginPage);
-
-            rightSpace.appendChild(button2);
-            dosButtons.appendChild(rightSpace);
-            buttonsDiv.appendChild(dosButtons)
-            content.appendChild(buttonsDiv);
-        }
-
-       
+    
         
         //lower box contains howto and leaderboard button
         let lowerBox = document.createElement("div");
@@ -227,28 +187,7 @@ export default class View {
         //for testing view of the score board
         let data = await getAllScores();
         data = data.data;
-        // let data = [
-        //     {
-        //         username: "DrJazzy",
-        //         score: 420
-        //     },
-        //     {
-        //         username: "LazyCow",
-        //         score: 419
-        //     },
-        //     {
-        //         username: "PogChamp420",
-        //         score: 365
-        //     },
-        //     {
-        //         username: "poopyhead",
-        //         score:  204
-        //     },
-        //     {
-        //         username: "imBad",
-        //         score: 3
-        //     }
-        // ];
+       
         //creates the overall id tag
         let page = document.createElement("div");
         page.setAttribute("id", "scorePage");
@@ -358,10 +297,6 @@ export default class View {
     tryAgain() {
         location.reload();
     }; 
-    
-    loadLoginPage(){
-        location.href = "../login.html"
-     
-    }
+
     
 }

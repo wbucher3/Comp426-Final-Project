@@ -2,11 +2,21 @@
   "0": {
     "id": 0,
     "user": "LazyCow",
-    "score": 419
+    "score": 422
   },
   "1": {
     "id": 1,
     "user": "drjazzy",
     "score": 420
+  },
+  "2": {
+    "id": 2,
+    "user": "drjazzy",
+    "score": 410
+  },
+  "3": {
+    "id": 3,
+    "user": "pogman",
+    "score": 80
   }
 }

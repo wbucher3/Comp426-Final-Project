@@ -104,6 +104,11 @@ a:hover {
     color:white;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
+#searchButton {
+    background-color: #25b4fc ;
+    color:white;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
 
 .leftDevil {
     -webkit-transform: scaleX(-1);
@@ -159,4 +164,22 @@ a:hover {
     box-sizing: content-box;
     width: 100%;
     padding: 5px;
+}
+
+.leaderBoardTitle {
+    font-size: 30px;
+
+}
+.leaderBoardPadding {
+    padding-top: 20px;
+    padding-right: 320px;
+    padding-bottom: 1px;
+    padding-left: 320px;
+}
+
+.searchBarPadding {
+    padding-top: 20px;
+    padding-right: 320px;
+    padding-bottom: 1px;
+    padding-left: 320px;
 }

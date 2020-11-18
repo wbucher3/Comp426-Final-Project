@@ -88,6 +88,12 @@ app.get('/score', (req, res) => {
     return;
 });
 
+app.get('/search/:searchTerm', (req, res) =>{
+    let term = req.params.searchTerm;
+    res.json(Score.getUserByTerm(term));
+
+})
+
 app.get('/score/:id', (req, res) => {
     //ensures someone is logged in
     if (req.session.user == undefined) {

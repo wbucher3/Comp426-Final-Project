@@ -22,6 +22,16 @@ Score.getAllIDs = () => {
     return Object.keys(scoreData.data).map((id => {return parseInt(id);}));
 };
 
+Score.getUserByTerm = (term) => {
+    return Object.keys(scoreData.data).filter(id => {
+
+        let user = scoreData.get(id).user;
+        if (user.includes(term)) {
+            return id;
+        }
+    }).map(id => scoreData.get(id));
+}
+
 Score.getAllIDsForUser = (user) => {
     return Object.keys(scoreData.data).filter((id) => scoreData.get(id).user == user).map((id => {return parseInt(id);}));
 }
