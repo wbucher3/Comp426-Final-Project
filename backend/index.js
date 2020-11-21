@@ -5,6 +5,8 @@ const app = express();
 
 const Score = require('./score.js');
 
+const Users = require('./user.js');
+
 //cookies use express session
 const expressSession = require('express-session');
 
@@ -55,6 +57,30 @@ app.post('/login', (req,res) => {
     }
     res.status(403).send("Password Wrong")
 
+    
+});
+
+app.post('/signup', (req,res) => {
+
+    let {username, password} = req.body
+    
+    let user_data = userData.get(user);
+
+    if (user_data == null) {
+        res.json()
+        let u = Users.create(username, password);
+        if (u == null) {
+            res.status(400).send("Bad Request");
+            return;
+        }
+        return res.json(u);
+
+    } else if (user_data.user == user) {
+        res.status(403).send("Account Already Exists");
+        return;
+    } else {
+        console.log("Shouldn't get here")
+    }
     
 });
 
