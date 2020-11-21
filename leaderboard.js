@@ -1,4 +1,4 @@
-import {getAllScores, getSearchData, getName} from "./APIcalls.js" 
+import {getAllScores, getSearchData, getName, logOut} from "./APIcalls.js" 
  
 const playAgain = function() {
     window.location.href = './game.html';
@@ -139,6 +139,11 @@ const getAutoCompleteScript = function(array) {
     `
 }
 
+const handleLogOut = async function() {
+  await logOut();
+  window.location.href = '../index.html';
+}
+
 
 
 const renderTable = function(inputData, name) {
@@ -191,6 +196,16 @@ const renderPage = async function(data) {
 
     buttonDiv.appendChild(againButton);
 
+    let logOutDiv = document.createElement("div");
+    logOutDiv.setAttribute("class", "logOutLeaderBoardPadding"); 
+
+    let logOutButton = document.createElement("button");
+    logOutButton.setAttribute("class", "button is-fullwidth growButton");
+    logOutButton.setAttribute("id", "logout");
+    logOutButton.innerText = "Logout"
+    logOutButton.addEventListener("click", handleLogOut)
+    logOutDiv.appendChild(logOutButton);
+
 
     let page = document.createElement("div");
     page.setAttribute("class", "content leaderBoardPadding");
@@ -213,9 +228,11 @@ const renderPage = async function(data) {
     searchButton.setAttribute("id", "searchButton")
     searchButton.addEventListener("click", handleRenderTable)
 
+
+    controlDiv.appendChild(logOutDiv);
     controlDiv.appendChild(searchBar);
 
-
+    
     controlDiv.appendChild(barScript);
     controlDiv.appendChild(searchButton);
 

@@ -1,5 +1,5 @@
 /* handle the display of game and webpage */
-import {getAllScores, getName} from "../APIcalls.js" 
+import {getAllScores, getName, logOut} from "../APIcalls.js" 
 
 export default class View {
     constructor(model) {
@@ -34,6 +34,11 @@ export default class View {
 
         return gameInfoDiv;
 
+    }
+
+    async logOut() {
+        await logOut();
+        window.location.href = '../index.html';
     }
 
 
@@ -165,9 +170,21 @@ export default class View {
                                     <a href="./leaderboard.html">View the Leaderboard</a>
                                 </h1>`
 
+        let logOutDiv = document.createElement("div");
+        logOutDiv.setAttribute("class", "boardLinkPadding"); 
+
+        let logOutButton = document.createElement("button");
+        logOutButton.setAttribute("class", "button growButton");
+        logOutButton.setAttribute("id", "logout");
+        logOutButton.innerText = "Logout"
+        logOutButton.addEventListener("click", this.logOut)
+        logOutDiv.appendChild(logOutButton);
+
+
         //combines all the stuff in the lower box
         containerDiv.appendChild(contentList);
         containerDiv.appendChild(boardLink);
+        containerDiv.appendChild(logOutDiv);
         sectionDiv.appendChild(containerDiv);
         boxDiv.appendChild(sectionDiv);
         lowerBox.appendChild(boxDiv);
@@ -238,7 +255,17 @@ export default class View {
         kanyeQuote.setAttribute("class", "content");
         kanyeQuote.innerHTML = "Hard Loss? <a href='./inspiration.html'>Maybe Kanye West could make you feel better.</a>";
 
+        // log out button
+        let logOutDiv = document.createElement("div");
 
+        let logOutButton = document.createElement("button");
+        logOutButton.setAttribute("class", "button is-small growButton");
+        logOutButton.setAttribute("id", "logout");
+        logOutButton.innerText = "Logout"
+        logOutButton.addEventListener("click", this.logOut)
+        logOutDiv.appendChild(logOutButton);
+
+        //next box
         let leaderBoard = document.createElement("div");
         leaderBoard.setAttribute("class", "box");
         leaderBoard.innerHTML = "<p class='yourScore'>Top 5 Scores</p>";
@@ -272,6 +299,7 @@ export default class View {
 
         //combines everything into one doc element, lowerContent
         yourScore.appendChild(kanyeQuote);
+        yourScore.appendChild(logOutDiv)
         middleInfo.appendChild(yourScore);
         middleInfo.appendChild(leaderBoard);
        

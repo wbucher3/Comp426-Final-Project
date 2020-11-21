@@ -54,7 +54,7 @@ export const getSearchData = async function(searchTerm) {
     try {
         const result = await axios({
             method: 'get',
-            //url: 'https://comp426projectbackend.herokuapp.com/search',
+            //url: 'https://comp426projectbackend.herokuapp.com/search' + searchTerm,
             url: 'http://localhost:3030/search/' + searchTerm,
             withCredentials: true
         });
@@ -70,7 +70,7 @@ export const updateScore = async function(score) {
     try {
         const result = await axios({
             method: 'put',
-            //url: 'https://comp426projectbackend.herokuapp.com/search',
+            //url: 'https://comp426projectbackend.herokuapp.com/score/' + id,
             url: 'http://localhost:3030/score/' + id,
             score: newScore,
             withCredentials: true
@@ -82,3 +82,21 @@ export const updateScore = async function(score) {
     }
     
 }
+
+export const logOut = async function() {
+    try {
+        const result = await axios({
+            method: 'get',
+            //url: 'https://comp426projectbackend.herokuapp.com/logout',
+            url: 'http://localhost:3030/logout',
+            withCredentials: true
+        });
+        return result;
+
+    } catch (error) {
+        return error;
+    }
+    
+}
+
+
