@@ -65,3 +65,20 @@ export const getSearchData = async function(searchTerm) {
     }
     
 }
+
+export const updateScore = async function(score) {
+    try {
+        const result = await axios({
+            method: 'put',
+            //url: 'https://comp426projectbackend.herokuapp.com/search',
+            url: 'http://localhost:3030/score/' + id,
+            score: newScore,
+            withCredentials: true
+        });
+        return result;
+
+    } catch (error) {
+        return error;
+    }
+    
+}

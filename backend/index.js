@@ -58,6 +58,8 @@ app.post('/login', (req,res) => {
     
 });
 
+//Gets the username of the current session
+// in use
 app.get('/user', (req, res) => {
 
     let username = req.session.user + "";
@@ -65,16 +67,20 @@ app.get('/user', (req, res) => {
     return;
 })
 
+//logs the user out of current session
 app.get('/logout', (req, res) => {
     delete req.session.user;
     res.json(true);
 });
 
+//gets all scores in database with user attached to it
+//in use
 app.get('/allScores', (req, res) => {
     res.json(Score.getAllScores());
     return;
 });
 
+//idk what this does TODO
 app.get('/game', (req,res) => {
     if (req.session.loggedin) {
         res.sendFile(path.join('../game.html'));
@@ -82,18 +88,21 @@ app.get('/game', (req,res) => {
 });
 
 
-
+//returns all the ids? TODO
 app.get('/score', (req, res) => {
     res.json(Score.getAllIDs());
     return;
 });
 
+//gets all the users that include this search term
+//in use
 app.get('/search/:searchTerm', (req, res) =>{
     let term = req.params.searchTerm;
     res.json(Score.getUserByTerm(term));
 
 })
 
+//gets the score of a certain ID
 app.get('/score/:id', (req, res) => {
     //ensures someone is logged in
     if (req.session.user == undefined) {
@@ -116,8 +125,8 @@ app.get('/score/:id', (req, res) => {
     res.json(s);
 });
 
+//posts a score with logged in user and given score
 app.post('/score', (req, res) => {
-
     //ensures someone is logged in
     if (req.session.user == undefined) {
         res.status(403).send("Unauthorized");
@@ -135,12 +144,15 @@ app.post('/score', (req, res) => {
     }
     return res.json(s);
 });
+
+//sign up
 // app.post('/signup', (req, res) => {
 //     let {user, password} = req.body;
 
 //     let newUser 
-// })
+// }) 
 
+//update score from given ID
 app.put('/score/:id', (req, res) => {
 
     //ensures someone is logged in
@@ -168,6 +180,7 @@ app.put('/score/:id', (req, res) => {
     res.json(s);
 ;})
 
+//delete a score from database
 app.delete('/score/:id', (req, res) => {
 
     //ensures someone is logged in
@@ -191,6 +204,8 @@ app.delete('/score/:id', (req, res) => {
     
     res.json(true);
 });
+
+
 //const port = 3030;
 // heroku has an evironment varibale that will have a port number
 

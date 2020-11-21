@@ -48,12 +48,6 @@ export default class View {
         let columnDiv = document.createElement("div");
         columnDiv.setAttribute("class", "columns");
 
-        // let leftcol = document.createElement("div");
-        // leftcol.setAttribute("class", "column");
-        // let leftBox = document.createElement("div");
-        // leftBox.setAttribute("class", "box scoreBox");
-        // leftBox.innerText = "thank you for playing!"
-        // leftcol.appendChild(leftBox);
         
         let centerCol = document.createElement("div");
         centerCol.setAttribute("class", "column is-four-fifths is-fullwidth")
@@ -95,6 +89,8 @@ export default class View {
             this.scorePage();
             this.model.app.ticker.stop();
             this.model.app.destroy(true, true);
+
+            //UPDATE API CALL FOR LEADERBOARD
         })
 
         this.model.onHit(game => {
