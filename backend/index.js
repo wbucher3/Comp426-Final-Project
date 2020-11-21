@@ -135,6 +135,11 @@ app.post('/score', (req, res) => {
     }
     return res.json(s);
 });
+// app.post('/signup', (req, res) => {
+//     let {user, password} = req.body;
+
+//     let newUser 
+// })
 
 app.put('/score/:id', (req, res) => {
 

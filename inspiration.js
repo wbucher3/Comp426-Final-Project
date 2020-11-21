@@ -45,7 +45,7 @@ const renderQuote = function(quote) {
 
     let backDiv = document.createElement("div");
     backDiv.setAttribute("class", "content");
-    backDiv.innerHTML = "<h1><a href=./index.html>Play Again</a></h1>"
+    backDiv.innerHTML = "<h1><a href=./game.html>Play Again</a></h1>"
 
 
     container.appendChild(textBody);

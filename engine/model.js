@@ -75,7 +75,7 @@ export default class Model {
         //just head and feet collision vs whole body collison
         if (this.noseCollision()) {
             //anything above 10.5 is really hard lmao
-            if (this.speed <= 10.5) {
+            if (this.speed <= 9.5) {
                 this.speed = this.speed * 1.02;
             }
             
@@ -214,7 +214,7 @@ export default class Model {
                 this.score += 2;
                 this.removeObstacle();
                 this.spawnObstacle();
-                console.log("Score: " + this.score)
+                //console.log("Score: " + this.score)
 
             }
         }

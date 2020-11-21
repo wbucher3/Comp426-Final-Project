@@ -77,7 +77,7 @@ const renderContent = function() {
 const handleLogin = async function() {
     let username = document.getElementById("usernameField").value;
     let password = document.getElementById("passwordField").value ;
-    console.log( username + " " + password);
+    //console.log( username + " " + password);
     let result = await login(username, password);
 
     if (result.data == true) {

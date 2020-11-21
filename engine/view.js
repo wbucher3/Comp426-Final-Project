@@ -195,10 +195,12 @@ export default class View {
         //play again
         let buttonDiv = document.createElement("div"); 
 
+        let username = await this.getUsername();
+
         let againButton = document.createElement("button");
         againButton.setAttribute("class", "button is-large is-fullwidth growButton");
         againButton.setAttribute("id", "playAgain");
-        againButton.innerHTML = "Wanna try Again, {username}?";
+        againButton.innerHTML = "Wanna try Again, " +username+"?";
         againButton.addEventListener("click", this.tryAgain)
 
         buttonDiv.appendChild(againButton);
@@ -254,7 +256,6 @@ export default class View {
          * make sure the data is sorted starting with the
          * largest value
          */
-        console.log(data);
         let temp = "";
         for (let i = 0 ; i < data.length ; i++) {
             let name = data[i].user;
