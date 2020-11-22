@@ -54,7 +54,7 @@ export const getSearchData = async function(searchTerm) {
     try {
         const result = await axios({
             method: 'get',
-            url: 'https://comp426projectbackend.herokuapp.com/search' + searchTerm,
+            url: 'https://comp426projectbackend.herokuapp.com/search/' + searchTerm,
             // url: 'http://localhost:3030/search/' + searchTerm,
             withCredentials: true
         });

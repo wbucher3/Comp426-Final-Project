@@ -100,8 +100,8 @@ app.delete('/deletee', (req, res) => {
 //Gets the username of the current session
 // in use
 app.get('/user', (req, res) => {
-
-    let username = req.session.user + "";
+    console.log(req.session.user);
+    let username = req.session.user.toString();
     res.json(username);
     return;
 })
@@ -138,7 +138,7 @@ app.get('/score', (req, res) => {
 app.get('/search/:searchTerm', (req, res) =>{
     let term = req.params.searchTerm;
     res.json(Score.getUserByTerm(term));
-
+    return;
 })
 
 //gets the score of a certain ID
