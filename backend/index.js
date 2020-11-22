@@ -19,7 +19,8 @@ app.use(cookieSession({
     //resave: false,
     //saveUninitialized: false,
     cookie: {
-        sameSite: 'strict'
+        sameSite: 'strict',
+        secure: true
     }
 }));
 
