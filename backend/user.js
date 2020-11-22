@@ -13,6 +13,15 @@ class User {
 
 }
 
+User.findByUsername = (user) => {
+    let sdata = loginData.get(user);
+    if (sdata != null) {
+        return new User(sdata.password);
+    } else {
+        return null;
+    }
+};
+
 User.create = (user, password) => {
     let s = new User(password);
     loginData.set(user, s);
