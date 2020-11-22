@@ -123,7 +123,7 @@ export default class View {
         this.model.app.ticker.add(delta => this.model.ticks(delta)); 
     
         // Shows score and leaderboared page
-        this.model.onLose(game => {
+        this.model.onLose(game =>  {
 
             this.sendScore(this.model.getScore());
             

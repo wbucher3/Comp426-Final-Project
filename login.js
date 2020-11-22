@@ -85,7 +85,7 @@ const handleLogin = async function() {
         location.href = "./game.html"
     } else {
         let errorMessage = document.createElement("article");
-        errorMessage.setAttribute("class", "messagee is-danger");
+        errorMessage.setAttribute("class", "message is-danger");
         let innerError = document.createElement("div");
         innerError.setAttribute("class", "message-body");
         innerError.innerText = "Invalid details.";
@@ -104,7 +104,7 @@ const handleSignUp = async function() {
         handleLogin();
     } else {
         let errorMessage = document.createElement("article");
-        errorMessage.setAttribute("class", "messagee is-danger");
+        errorMessage.setAttribute("class", "message is-danger");
         let innerError = document.createElement("div");
         innerError.setAttribute("class", "message-body");
         innerError.innerText = "This username is already taken.";
