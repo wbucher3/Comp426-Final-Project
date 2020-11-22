@@ -24,20 +24,22 @@ app.use(expressSession({
 let cors = require('cors');
 
 const corsConfig = {
-    origin: 'http://localhost:3000',
+    // origin: 'http://localhost:3000',
+    origin: 'http://wbucher3.github.io',
     credentials: true
 }
 app.use(cors(corsConfig));
 
 const bodyParser = require('body-parser');
+const User = require('./user.js');
 app.use(bodyParser.json());
 
 //storage of user/passwords
 const loginData = require('data-store')({path: process.cwd() + '/data/users.json'});
 
-const PORT = process.env.PORT||'3030';
+const PORT = process.env.PORT || '3030';
 
-app.post('/login', (req,res) => {
+app.post('/login', (req, res) => {
 
     let {user, password} = req.body
     
@@ -48,7 +50,7 @@ app.post('/login', (req,res) => {
         return;
     } 
     if (user_data.password == password) {
-        
+
         req.session.loggedin = true;
         req.session.user = user;
 
@@ -60,28 +62,38 @@ app.post('/login', (req,res) => {
     
 });
 
-app.post('/signup', (req,res) => {
+app.post('/signup', (req, res) => {
 
-    let {username, password} = req.body
+    let {user, password} = req.body
     
-    let user_data = userData.get(user);
+    let user_data = loginData.get(user);
 
     if (user_data == null) {
-        res.json()
-        let u = Users.create(username, password);
+        let u = Users.create(user, password);
         if (u == null) {
             res.status(400).send("Bad Request");
             return;
         }
-        return res.json(u);
+        res.json(u);
+        return;
 
-    } else if (user_data.user == user) {
+    } else {
         res.status(403).send("Account Already Exists");
         return;
-    } else {
-        console.log("Shouldn't get here")
     }
     
+});
+
+// For testing purposes
+app.delete('/deletee', (req, res) => {
+    let {user} = req.body
+    
+    let user_data = loginData.get(user);
+
+    let s = new User(user_data.password);
+
+    s.delete(user);
+    return;
 });
 
 //Gets the username of the current session
@@ -171,13 +183,6 @@ app.post('/score/', (req, res) => {
     }
     return res.json(s);
 });
-
-//sign up
-// app.post('/signup', (req, res) => {
-//     let {user, password} = req.body;
-
-//     let newUser 
-// }) 
 
 //update score from given ID
 app.put('/score/:id', (req, res) => {

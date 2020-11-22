@@ -1,4 +1,4 @@
-import {login} from './APIcalls.js'
+import {login, signup} from './APIcalls.js'
 
 const renderContent = function() {
     let whole = document.createElement("div");
@@ -86,8 +86,15 @@ const handleLogin = async function() {
     }
 }
 
-const handleSignUp = function() {
-    
+const handleSignUp = async function() {
+    let username = document.getElementById("usernameField").value;
+    let password = document.getElementById("passwordField").value ;
+    //console.log( username + " " + password);
+    let result = await signup(username, password);
+
+    if (result.data == true) {
+        location.href = "./game.html"
+    }
 }
 
 const domLoader = function() {
