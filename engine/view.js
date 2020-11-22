@@ -235,8 +235,8 @@ export default class View {
 
     async scorePage() {
         //for testing view of the score board
-        let data = await getAllScores();
-        data = data.data;
+        let inputData = await getAllScores();
+        inputData = inputData.data;
        
         //creates the overall id tag
         let page = document.createElement("div");
@@ -317,7 +317,8 @@ export default class View {
          * largest value
          */
         let temp = "";
-        for (let i = 0 ; i < data.length ; i++) {
+        let data = inputData.sort(function(a, b){return b.score-a.score});
+        for (let i = 0 ; i < 5 ; i++) {
             let name = data[i].user;
             let score = data[i].score;
 

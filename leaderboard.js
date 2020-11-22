@@ -158,6 +158,7 @@ const renderTable = function(inputData, name) {
     if (data.length === 0) {
         let messageReturn = document.createElement("p");
         messageReturn.setAttribute("class", "p");
+        messageReturn.setAttribute("id", "table");
         messageReturn.innerText = "No Scores in Database from the Username of '" + name + "'";
         return messageReturn;
     }
