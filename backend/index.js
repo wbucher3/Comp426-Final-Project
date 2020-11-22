@@ -13,7 +13,7 @@ const Users = require('./user.js');
 const expressSession = require('express-session');
 app.set('trustproxy', true);
 
-app.use(expressSession({
+app.use(session({
     name: "GameSessionCookie",
     secret:"secret phrase",
     resave: false,
