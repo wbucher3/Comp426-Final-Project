@@ -66,21 +66,38 @@ export const getSearchData = async function(searchTerm) {
     
 }
 
-export const updateScore = async function(score) {
+export const updateScore = async function(id, score) {
     try {
         const result = await axios({
             method: 'put',
             //url: 'https://comp426projectbackend.herokuapp.com/score/' + id,
             url: 'http://localhost:3030/score/' + id,
-            score: newScore,
+            score: score,
             withCredentials: true
         });
         return result;
 
     } catch (error) {
         return error;
-    }
-    
+    } 
+}
+export const postScore = async function(score) {
+    console.log(score);
+    try {
+        const result = await axios({
+            method: 'post',
+            //url: 'https://comp426projectbackend.herokuapp.com/score/' + id,
+            url: 'http://localhost:3030/score/',
+            data: {
+                score: score
+            },
+            withCredentials: true
+        });
+        return result;
+
+    } catch (error) {
+        return error;
+    } 
 }
 
 export const logOut = async function() {

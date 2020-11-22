@@ -1,5 +1,5 @@
 /* handle the display of game and webpage */
-import {getAllScores, getName, logOut} from "../APIcalls.js" 
+import {getAllScores, getName, logOut, updateScore, postScore} from "../APIcalls.js" 
 
 export default class View {
     constructor(model) {
@@ -39,6 +39,44 @@ export default class View {
     async logOut() {
         await logOut();
         window.location.href = '../index.html';
+    }
+
+    async sendScore(score) {
+        //is there a score post for this user?
+        let username = await getName(); 
+        username = username.data;
+
+        let data = await getAllScores() ; 
+        data = data.data;
+        let usernames = data.map(thing => thing.user);
+        
+        //checks to see if they have a score in database
+        let isInData = usernames.includes(username);
+
+        if (isInData) {
+            //we are checking to see if their new score is better than old one
+            let currentScore = data.filter(thing => thing.user == username );
+            console.log(currentScore[0]);
+            console.log(score);
+            if (currentScore[0].score < score) {
+                //push score
+                return await updateScore(currentScore[0].id, score);
+                
+                console.log("score updated");
+                
+            } else {
+                
+                console.log("no posted");
+                return;
+            }
+            
+        } else {
+            //this is their first score
+            console.log("posted " + data.length);
+            return await postScore(data.length, score);
+            
+        }
+    
     }
 
 
@@ -91,9 +129,14 @@ export default class View {
     
         // Shows score and leaderboared page
         this.model.onLose(game => {
-            this.scorePage();
-            this.model.app.ticker.stop();
-            this.model.app.destroy(true, true);
+
+            this.sendScore(this.model.getScore());
+            setTimeout(function(){
+                this.scorePage();
+                this.model.app.ticker.stop();
+                this.model.app.destroy(true, true);
+            }, 1000);
+            
 
             //UPDATE API CALL FOR LEADERBOARD
         })

@@ -152,14 +152,15 @@ app.get('/score/:id', (req, res) => {
 });
 
 //posts a score with logged in user and given score
-app.post('/score', (req, res) => {
+app.post('/score/', (req, res) => {
     //ensures someone is logged in
     if (req.session.user == undefined) {
         res.status(403).send("Unauthorized");
     }
+    console.log(req.body);
 
-
-    let {user, score} = req.body
+    let {score} = req.body;
+    console.log(score);
     // TODO : add checks with like 400 or 500 errors to make sure everything is good
 
     //user now comes from the login to prevent them from posting to other users
@@ -192,7 +193,7 @@ app.put('/score/:id', (req, res) => {
         return;
     }
     //only update the score of yourself
-    if (s.owner != req.session.user) {
+    if (s.user != req.session.user) {
         res.status(403).send("Unauthorized");
         return;
     }

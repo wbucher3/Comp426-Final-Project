@@ -12,11 +12,16 @@
   "2": {
     "id": 2,
     "user": "drjazzy",
-    "score": 189
+    "score": 30
   },
   "3": {
     "id": 3,
     "user": "pogman",
     "score": 80
+  },
+  "4": {
+    "id": 4,
+    "user": "will",
+    "score": 4
   }
 }
