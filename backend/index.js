@@ -26,8 +26,8 @@ app.use(expressSession({
 let cors = require('cors');
 
 const corsConfig = {
-    origin: 'http://localhost:3000',
-    // origin: 'https://wbucher3.github.io',
+    // origin: 'http://localhost:3000',
+    origin: 'https://wbucher3.github.io',
     credentials: true
 }
 app.use(cors(corsConfig));
