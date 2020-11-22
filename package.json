@@ -4,7 +4,7 @@
   "description": "final project for comp426",
   "main": "index.js",
   "scripts": {
-    "start": "node ./backend/index.js"
+    "start": "node -r esm ./backend/index.js"
   },
   "repository": {
     "type": "git",
