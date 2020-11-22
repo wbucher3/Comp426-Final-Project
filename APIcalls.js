@@ -84,7 +84,6 @@ export const updateScore = async function(id, score) {
     } 
 }
 export const postScore = async function(score) {
-    console.log(score);
     try {
         const result = await axios({
             method: 'post',
