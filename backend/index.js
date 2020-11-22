@@ -35,7 +35,6 @@ const User = require('./user.js');
 app.use(bodyParser.json());
 
 //storage of user/passwords
-const loginData = require('data-store')({path: process.cwd() + '/data/users.json'});
 
 const PORT = process.env.PORT || '3030';
 

@@ -1,17 +1,4 @@
 {
-<<<<<<< HEAD
-    "drjazzy": {
-        "password": "poggers"
-    },
-
-    "LazyCow": {
-        "password": "lmaoo"
-    },
-
-    "will": {
-        "password": "will"
-    }
-=======
   "drjazzy": {
     "password": "poggers"
   },
@@ -57,5 +44,4 @@
   "o": {
     "password": "i"
   }
->>>>>>> 115d3f176926af707cc036153b40339e8a55d6b0
 }
