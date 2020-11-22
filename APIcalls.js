@@ -88,7 +88,7 @@ export const postScore = async function(score) {
     try {
         const result = await axios({
             method: 'post',
-            url: 'https://comp426projectbackend.herokuapp.com/score/' + id,
+            url: 'https://comp426projectbackend.herokuapp.com/score/',
             // url: 'http://localhost:3030/score/',
             data: {
                 score: score

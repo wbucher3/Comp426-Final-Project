@@ -69,7 +69,7 @@ export default class View {
         } else {
             //this is their first score
             //console.log("posted " + data.length);
-            return await postScore(data.length, score);
+            return await postScore(score);
             
         }
     
@@ -130,7 +130,7 @@ export default class View {
             
             this.model.app.ticker.stop();
             this.model.app.destroy(true, true);
-            setTimeout(function() {
+            setTimeout(() => {
                 this.scorePage();
             }, 500);
 
