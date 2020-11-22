@@ -99,4 +99,21 @@ export const logOut = async function() {
     
 }
 
+export const signup = async function(username, givenPassword) {
+    try {
+        const result = await axios({
+            method: 'post',
+            //url: 'https://comp426projectbackend.herokuapp.com/signup',
+            url: 'http://localhost:3030/signup',
+            data: {
+                user: username,
+                password: givenPassword,
+            },
+            withCredentials: true
+        });
+        return result;
 
+    } catch (error) {
+        return error;
+    }
+}
