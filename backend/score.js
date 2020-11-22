@@ -1,4 +1,4 @@
-const scoreData = require('data-store')({path: process.cwd() + './data/score.json'});
+const scoreData = require('data-store')({path: process.cwd() + '/data/score.json'});
 
 class Score {
 
