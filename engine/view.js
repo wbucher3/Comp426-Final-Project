@@ -127,12 +127,13 @@ export default class View {
         this.model.onLose(game => {
 
             this.sendScore(this.model.getScore());
-            this.scorePage();
+            
             this.model.app.ticker.stop();
             this.model.app.destroy(true, true);
-        
+            setTimeout(function() {
+                this.scorePage();
+            }, 500);
 
-            //UPDATE API CALL FOR LEADERBOARD
         })
 
         this.model.onHit(game => {

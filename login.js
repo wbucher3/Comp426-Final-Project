@@ -81,7 +81,6 @@ const handleLogin = async function() {
     let result = await login(username, password);
 
     if (result.data == true) {
-        
         location.href = "./game.html"
     }
 }
@@ -93,7 +92,7 @@ const handleSignUp = async function() {
     let result = await signup(username, password);
 
     if (result.data == true) {
-        location.href = "./game.html"
+        handleLogin();
     }
 }
 

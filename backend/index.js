@@ -77,7 +77,7 @@ app.post('/signup', (req, res) => {
             res.status(400).send("Bad Request");
             return;
         }
-        res.json(u);
+        res.json(true);
         return;
 
     } else {
