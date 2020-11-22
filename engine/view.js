@@ -56,8 +56,7 @@ export default class View {
         if (isInData) {
             //we are checking to see if their new score is better than old one
             let currentScore = data.filter(thing => thing.user == username );
-            console.log(currentScore[0]);
-            console.log(score);
+            
             if (currentScore[0].score < score) {
                 //push score
                 return await updateScore(currentScore[0].id, score);
@@ -130,10 +129,7 @@ export default class View {
             
             this.model.app.ticker.stop();
             this.model.app.destroy(true, true);
-            setTimeout(() => {
-                this.scorePage();
-            }, 500);
-
+            this.scorePage();
         })
 
         this.model.onHit(game => {

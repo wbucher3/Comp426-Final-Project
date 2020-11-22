@@ -167,7 +167,7 @@ app.get('/score/:id', (req, res) => {
 });
 
 //posts a score with logged in user and given score
-app.post('/score/', (req, res) => {
+app.post('/score', (req, res) => {
     //ensures someone is logged in
     if (req.session.user == undefined) {
         res.status(403).send("Unauthorized");
