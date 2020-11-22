@@ -15,6 +15,7 @@ const renderContent = function() {
 
     let username = document.createElement("input");
     username.setAttribute("class", "input");
+    username.setAttribute("maxlength", "12");
     username.setAttribute("placeholder", "Username");
     username.setAttribute("id", "usernameField");
 
@@ -25,6 +26,7 @@ const renderContent = function() {
 
     let password = document.createElement("input");
     password.setAttribute("class", "input");
+    password.setAttribute("type", "password");
     password.setAttribute("placeholder", "Password");
     password.setAttribute("id", "passwordField");
     

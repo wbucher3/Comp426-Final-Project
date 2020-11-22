@@ -123,9 +123,9 @@ export default class View {
         this.model.app.ticker.add(delta => this.model.ticks(delta)); 
     
         // Shows score and leaderboared page
-        this.model.onLose(game =>  {
+        this.model.onLose( async (game) =>  {
 
-            this.sendScore(this.model.getScore());
+            await this.sendScore(this.model.getScore());
             
             this.model.app.ticker.stop();
             this.model.app.destroy(true, true);
@@ -167,7 +167,7 @@ export default class View {
         let button = document.createElement("button");
         button.setAttribute("class", "button is-large is-fullwidth growButton ");
         button.setAttribute("id", "start");
-        button.innerHTML = "Welcome back, " + username + ", Ready to Play?";
+        button.innerHTML = "Hello There, " + username + "! Click Here to Play!";
         button.addEventListener("click", this.startGame);
 
         //adds button to main page
@@ -307,12 +307,7 @@ export default class View {
         let leaderTable = document.createElement("table");
         leaderTable.setAttribute("class", "table is-fullwidth is-hoverable"); 
 
-        //will the array be pre-sorted?
-        /**TODO 
-         * change for loop to a length of 5
-         * make sure the data is sorted starting with the
-         * largest value
-         */
+    
         let temp = "";
         let data = inputData.sort(function(a, b){return b.score-a.score});
         for (let i = 0 ; i < 5 ; i++) {
