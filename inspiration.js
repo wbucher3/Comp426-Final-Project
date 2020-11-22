@@ -62,7 +62,6 @@ const domLoader = async function() {
     let $root = document.getElementById("root");
 
     let quote = await getQuote();
-    console.log(quote);
     let blockquote = renderQuote(quote.data.quote);
 
     $root.appendChild(blockquote);

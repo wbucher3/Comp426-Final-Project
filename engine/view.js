@@ -61,13 +61,11 @@ export default class View {
                 //push score
                 return await updateScore(currentScore[0].id, score);
             } else {
-                //console.log("no posted");
                 return;
             }
             
         } else {
             //this is their first score
-            //console.log("posted " + data.length);
             return await postScore(score);
             
         }
@@ -110,7 +108,6 @@ export default class View {
         rightcol.appendChild(scoreBoxPosition);
 
 
-        //columnDiv.appendChild(leftcol);
         columnDiv.appendChild(centerCol);
         columnDiv.appendChild(rightcol); 
 
