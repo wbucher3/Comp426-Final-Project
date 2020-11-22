@@ -25,7 +25,7 @@ let cors = require('cors');
 
 const corsConfig = {
     // origin: 'http://localhost:3000',
-    origin: 'http://wbucher3.github.io',
+    origin: 'https://wbucher3.github.io',
     credentials: true
 }
 app.use(cors(corsConfig));
