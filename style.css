@@ -14,8 +14,7 @@
 .box {
     background-color: white;
     color:#25b4fc;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
 }
 .howToTitle{
     font-size: 30px;
@@ -87,32 +86,32 @@ a:hover {
 #start {
     background-color: #25b4fc ;
     color:white;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 #playAgain {
     background-color: #25b4fc ;
     color:white;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 #signUp {
     background-color: #25b4fc ;
     color:white;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 #login {
     background-color: #25b4fc ;
     color:white;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 #searchButton {
     background-color: #25b4fc ;
     color:white;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
  #logout {
     background-color: #25b4fc ;
     color:white;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
  }
 .leftDevil {
     -webkit-transform: scaleX(-1);
@@ -125,7 +124,7 @@ a:hover {
 }
 .table {
     color:#25b4fc;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .loginLabels {
     padding-bottom: 10px;

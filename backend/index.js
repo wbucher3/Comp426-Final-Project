@@ -17,12 +17,12 @@ app.use(cookieSession({
     name: "GameSessionCookie",
     secret:"secret phrase",
     maxAge: 24 * 60 * 60 * 1000,
-    //resave: false,
-    //saveUninitialized: false,
+    resave: false,
+    saveUninitialized: false,
     cookie: {
-        // sameSite: true,
+        // sameSite: 'Strict',
         // secure: true,
-        SameSite: "lax", 
+        SameSite: 'Lax', 
         Secure: true
     }
 }));
