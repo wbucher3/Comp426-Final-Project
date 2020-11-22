@@ -16,10 +16,11 @@ app.set('trustproxy', 1);
 app.use(cookieSession({
     name: "GameSessionCookie",
     secret:"secret phrase",
+    maxAge: 24 * 60 * 60 * 1000,
     //resave: false,
     //saveUninitialized: false,
     cookie: {
-        sameSite: 'strict',
+        sameSite: true,
         secure: true
     }
 }));
