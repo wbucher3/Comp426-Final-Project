@@ -16,11 +16,12 @@ app.use(expressSession({
     name: "GameSessionCookie",
     secret:"secret phrase",
     resave: false,
-    saveUninitialized: false,
-    // cookie: {
-    //     sameSite:'none',
-    //     expires: 6000000
-    // }
+    saveUninitialized: true,
+    cookie: {
+        path: "/",
+        secure: true,
+        httpOnly: true
+    }
 }));
 
 let cors = require('cors');
