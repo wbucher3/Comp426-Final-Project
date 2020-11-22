@@ -3,6 +3,7 @@ import {login, signup} from './APIcalls.js'
 const renderContent = function() {
     let whole = document.createElement("div");
     whole.setAttribute("class", "loginPadding");
+    whole.setAttribute("id", "mainCard")
 
     let box = document.createElement("div");
     box.setAttribute("class", "box loginContentPadding");
@@ -82,6 +83,14 @@ const handleLogin = async function() {
 
     if (result.data == true) {
         location.href = "./game.html"
+    } else {
+        let errorMessage = document.createElement("article");
+        errorMessage.setAttribute("class", "messagee is-danger");
+        let innerError = document.createElement("div");
+        innerError.setAttribute("class", "message-body");
+        innerError.innerText = "Invalid details.";
+        errorMessage.appendChild(innerError);
+        document.getElementById("mainCard").appendChild(errorMessage);
     }
 }
 
@@ -93,8 +102,22 @@ const handleSignUp = async function() {
 
     if (result.data == true) {
         handleLogin();
+    } else {
+        let errorMessage = document.createElement("article");
+        errorMessage.setAttribute("class", "messagee is-danger");
+        let innerError = document.createElement("div");
+        innerError.setAttribute("class", "message-body");
+        innerError.innerText = "This username is already taken.";
+        errorMessage.appendChild(innerError);
+        document.getElementById("mainCard").appendChild(errorMessage);
     }
 }
+
+{/* <article class="message is-danger">
+  <div class="message-body">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+  </div>
+</article> */}
 
 const domLoader = function() {
     let $root = document.getElementById("root") ; 
