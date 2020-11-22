@@ -20,8 +20,10 @@ app.use(cookieSession({
     //resave: false,
     //saveUninitialized: false,
     cookie: {
-        sameSite: true,
-        secure: true
+        // sameSite: true,
+        // secure: true,
+        SameSite: true, 
+        Secure: true
     }
 }));
 
