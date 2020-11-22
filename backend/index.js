@@ -10,18 +10,16 @@ const Score = require('./score.js');
 const Users = require('./user.js');
 
 //cookies use express session
-const expressSession = require('express-session');
+const cookieSession = require('cookie-session');
 app.set('trustproxy', 1);
 
-app.use(expressSession({
+app.use(cookieSession({
     name: "GameSessionCookie",
     secret:"secret phrase",
-    resave: false,
-    saveUninitialized: false,
+    //resave: false,
+    //saveUninitialized: false,
     cookie: {
-        sameSite: "strict",
-        secure: true,
-        httpOnly: true
+        sameSite: 'strict'
     }
 }));
 
