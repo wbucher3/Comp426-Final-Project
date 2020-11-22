@@ -42,7 +42,7 @@ app.post('/login', (req, res) => {
 
     let {user, password} = req.body
     
-    let user_data = loginData.get(user);
+    let user_data = User.findByUsername(user);
 
     if (user_data == null) {
         res.status(404).send("Account Not Found");
@@ -65,7 +65,7 @@ app.post('/signup', (req, res) => {
 
     let {user, password} = req.body
     
-    let user_data = loginData.get(user);
+    let user_data = User.findByUsername(user);
 
     if (user_data == null) {
         let u = Users.create(user, password);
@@ -87,7 +87,7 @@ app.post('/signup', (req, res) => {
 app.delete('/deletee', (req, res) => {
     let {user} = req.body
     
-    let user_data = loginData.get(user);
+    let user_data = User.findByUsername(user);
 
     let s = new User(user_data.password);
 
