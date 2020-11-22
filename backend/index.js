@@ -22,7 +22,7 @@ app.use(cookieSession({
     cookie: {
         // sameSite: true,
         // secure: true,
-        SameSite: true, 
+        SameSite: "lax", 
         Secure: true
     }
 }));
