@@ -77,6 +77,8 @@ export default class Model {
             //anything above 10.5 is really hard lmao
             if (this.speed <= 9.5) {
                 this.speed = this.speed * 1.02;
+            } else if (this.speed <= 9.8) {
+                this.speed = this.speed * 1.0005
             }
             
         }
@@ -98,17 +100,6 @@ export default class Model {
                 this.lose = true;
             }
         }
-        /*
-        if (this.score == 20) {
-            this.speed = 6
-        } else if (this.score == 100) {
-            this.speed = 8;
-        } else if (this.score == 200) {
-            this.speed = 9;
-        } else if (this.score == 300) {
-            this.speed = 10;
-        }
-        */
        
     }
 
@@ -187,9 +178,6 @@ export default class Model {
                 this.player.sprite.x += (this.piecesWidth * 1.4) ;
             }   
         }
-        
-        //console.log(this.player.sprite.x + ", " + this.player.sprite.y);
-        //console.log(this.player.sprite.getBounds());
     }
 
     //checks to see if an enemy has intersected with the player
@@ -198,9 +186,7 @@ export default class Model {
         // check to see if any obstacles from array intersected with the player
         // set the player to Dead if this is true
         // end the game
-        // do some type of listener?
 
-        // change 1 to 3 for other game
         for (let i = 0; i < 1 ; i++) {
             let enemyBounds = this.obstacleArray[i].getBounds();
             let playerBounds = this.player.sprite.getBounds();
@@ -208,13 +194,10 @@ export default class Model {
                     enemyBounds.x < playerBounds.x + playerBounds.width && 
                     enemyBounds.y + enemyBounds.height > playerBounds.y && 
                     enemyBounds.y < playerBounds.y + playerBounds.height) {
-                // The comment below this is for the other game idea.
-                // this.updateListener(Model.Event.LOSE);
 
                 this.score += 2;
                 this.removeObstacle();
                 this.spawnObstacle();
-                //console.log("Score: " + this.score)
 
             }
         }

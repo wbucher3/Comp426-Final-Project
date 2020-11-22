@@ -166,12 +166,17 @@ const renderTable = function(inputData, name) {
     for (let i = 0 ; i < data.length ; i++) {
         let overall = document.createElement("tr");
 
+        let spot = i + 1
+        let rank = document.createElement("td");
+        rank.innerText = "[ " + spot + " ]";
+
         let name = document.createElement("td");
         name.innerText = data[i].user;
 
         let score = document.createElement("td");
-        score.innerText = data[i].score ; 
+        score.innerText = data[i].score; 
 
+        overall.appendChild(rank);
         overall.appendChild(name);
         overall.appendChild(score);
 
