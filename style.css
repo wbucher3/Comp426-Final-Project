@@ -3,6 +3,8 @@
 } 
 html {
     background-color: lightgray;
+    width: 100vw;
+    height: 100vh:
 }
 .page {
     padding-top: 20px;
