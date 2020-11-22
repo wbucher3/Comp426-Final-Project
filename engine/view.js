@@ -102,7 +102,7 @@ export default class View {
         scoreBoxPosition.setAttribute("class", "scorePadding")
 
         let scoreBox = document.createElement("div");
-        scoreBox.setAttribute("class", "box");
+        scoreBox.setAttribute("class", "box infobox");
 
         
         scoreBox.appendChild(this.renderScore());
