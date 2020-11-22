@@ -61,18 +61,14 @@ export default class View {
             if (currentScore[0].score < score) {
                 //push score
                 return await updateScore(currentScore[0].id, score);
-                
-                console.log("score updated");
-                
             } else {
-                
-                console.log("no posted");
+                //console.log("no posted");
                 return;
             }
             
         } else {
             //this is their first score
-            console.log("posted " + data.length);
+            //console.log("posted " + data.length);
             return await postScore(data.length, score);
             
         }
@@ -131,12 +127,10 @@ export default class View {
         this.model.onLose(game => {
 
             this.sendScore(this.model.getScore());
-            setTimeout(function(){
-                this.scorePage();
-                this.model.app.ticker.stop();
-                this.model.app.destroy(true, true);
-            }, 1000);
-            
+            this.scorePage();
+            this.model.app.ticker.stop();
+            this.model.app.destroy(true, true);
+        
 
             //UPDATE API CALL FOR LEADERBOARD
         })

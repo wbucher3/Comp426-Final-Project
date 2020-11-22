@@ -10,18 +10,18 @@
     "score": 40
   },
   "2": {
-    "id": 2,
-    "user": "drjazzy",
-    "score": 30
-  },
-  "3": {
     "id": 3,
     "user": "pogman",
     "score": 80
   },
-  "4": {
+  "3": {
     "id": 4,
     "user": "will",
     "score": 4
+  },
+  "4": {
+    "id": 4,
+    "user": "drjazzy",
+    "score": 10
   }
 }
