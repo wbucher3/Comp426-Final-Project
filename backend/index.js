@@ -89,6 +89,15 @@ app.post('/signup', (req, res) => {
     
 });
 
+app.get('/checkLogin', (req,res) => {
+    if (req.session.user != null) {
+        res.json(true);
+    } else {
+        res.json(false);
+    }
+    return;
+});
+
 // For testing purposes
 app.delete('/deletee', (req, res) => {
     let {user} = req.body
@@ -127,6 +136,7 @@ app.get('/game', (req,res) => {
     if (req.session.loggedin) {
         res.sendFile(path.join('../game.html'));
     }
+    return;
 });
 
 

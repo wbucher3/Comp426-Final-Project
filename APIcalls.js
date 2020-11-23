@@ -135,3 +135,19 @@ export const signup = async function(username, givenPassword) {
         return error;
     }
 }
+
+export const checkLogin = async function() {
+    try {
+        const result = await axios({
+            method: 'get',
+            url: 'https://comp426projectbackend.herokuapp.com/checkLogin',
+            // url: 'http://localhost:3030/checkLogin',
+            withCredentials: true
+        });
+        return result;
+
+    } catch (error) {
+        return error;
+    }
+    
+}

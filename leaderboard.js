@@ -172,7 +172,6 @@ const renderTable = function(inputData, name) {
         let score = document.createElement("td");
         score.innerText = data[i].score; 
 
-        overall.appendChild(rank);
         overall.appendChild(name);
         overall.appendChild(score);
 
