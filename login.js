@@ -111,9 +111,13 @@ const handleSignUp = async function() {
         errorMessage.setAttribute("class", "message is-danger");
         let innerError = document.createElement("div");
         innerError.setAttribute("class", "message-body");
+        innerError.setAttribute("id", "takenMSG");
         innerError.innerText = "This username is already taken.";
         errorMessage.appendChild(innerError);
         document.getElementById("mainCard").appendChild(errorMessage);
+        setTimeout(() => {
+            document.getElementById("takenMSG").remove();
+        }, 2000);
     }
 }
 
