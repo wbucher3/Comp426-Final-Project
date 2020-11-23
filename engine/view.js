@@ -191,10 +191,11 @@ export default class View {
 
             let contentList = document.createElement("dl");
             contentList.setAttribute("class", "content is-large");
-            contentList.innerHTML = `   <li>Move the Ram Side to Side using 'A' and 'D' or Left and Right Arrow keys</li>
+            contentList.innerHTML = `   <li>Move the Ram side to side using 'A' and 'D' or Left and Right arrow keys</li>
                                         <li>Headbutt the Dookies storming the court! They are having a hard time accepting their L!
+                                        <li>The Dookies can get up to a speed of 10!</li>
                                         <li>If 3 Dookies get by you, it's game over!</li>
-                                        <li>Headbutt Enough Dookies to Earn a spot on the Leaderboard!</li>`
+                                        <li>Headbutt enough Dookies to earn a spot on the leaderboard!</li>`
 
 
             let boardLink = document.createElement("div");

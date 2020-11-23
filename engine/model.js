@@ -77,7 +77,7 @@ export default class Model {
             if (this.speed <= 9.5) {
                 this.speed = this.speed * 1.02;
             } else if (this.speed <= 10) {
-                this.speed = this.speed * 1.00005
+                this.speed = this.speed * 1.0005
             }
             
         }
