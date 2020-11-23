@@ -62,10 +62,9 @@ export default class Model {
     }
 
     // the ticks are started in the view BTW
-    ticks (delta) {
+    ticks(delta) {
 
         // Makes the devil move across the screen.
-        // Incresase number from 1 to 3 for other game
         for (let i = 0; i < 1; i++) {
             // Adjust the number being added to make the devil
             // move faster or slower
@@ -77,8 +76,8 @@ export default class Model {
             //anything above 10.5 is really hard lmao
             if (this.speed <= 9.5) {
                 this.speed = this.speed * 1.02;
-            } else if (this.speed <= 9.8) {
-                this.speed = this.speed * 1.0005
+            } else if (this.speed <= 10) {
+                this.speed = this.speed * 1.00005
             }
             
         }
@@ -144,9 +143,6 @@ export default class Model {
                     enemyBounds.x < playerBounds.x + playerBounds.width && 
                     devilFeetStart + devilFeetHeight > newPlayerY && 
                     devilFeetStart < newPlayerY + ramNoseHeight) {
-                // The comment below this is for the other game idea.
-                // this.updateListener(Model.Event.LOSE);
-
                 
                 this.score += 2;
                 this.removeObstacle();
@@ -176,30 +172,7 @@ export default class Model {
         }
     }
 
-    //checks to see if an enemy has intersected with the player
-    // if true, then the game will end
-    collision() {
-        // check to see if any obstacles from array intersected with the player
-        // set the player to Dead if this is true
-        // end the game
-
-        for (let i = 0; i < 1 ; i++) {
-            let enemyBounds = this.obstacleArray[i].getBounds();
-            let playerBounds = this.player.sprite.getBounds();
-            if (enemyBounds.x + enemyBounds.width > playerBounds.x && 
-                    enemyBounds.x < playerBounds.x + playerBounds.width && 
-                    enemyBounds.y + enemyBounds.height > playerBounds.y && 
-                    enemyBounds.y < playerBounds.y + playerBounds.height) {
-
-                this.score += 2;
-                this.removeObstacle();
-                this.spawnObstacle();
-
-            }
-        }
-
-    }
-
+    
     onLose(callback) {
         this.addListener({
             event: Model.Event.LOSE,

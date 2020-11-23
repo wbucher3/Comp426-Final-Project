@@ -118,6 +118,9 @@ export default class View {
 
         // Starts the ticker
         this.model.app.ticker.add(delta => this.model.ticks(delta)); 
+
+        // Trying to limit fps so devils won't be extremely fast
+        this.model.app.ticker.maxFPS = 59.99;
     
         // Shows score and leaderboared page
         this.model.onLose( async (game) =>  {
@@ -156,9 +159,6 @@ export default class View {
         content.setAttribute("id", "landingPage");
 
         if (check.data) {
-
-
-
             let username = await this.getUsername();
 
 
