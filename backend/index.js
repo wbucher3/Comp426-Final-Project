@@ -30,7 +30,6 @@ app.use(cookieSession({
 let cors = require('cors');
 
 const corsConfig = {
-    // origin: 'http://localhost:3000',
     origin: 'https://wbucher3.github.io',
     credentials: true
 }
@@ -131,7 +130,7 @@ app.get('/allScores', (req, res) => {
     return;
 });
 
-//idk what this does TODO
+// if logged in takes to game
 app.get('/game', (req,res) => {
     if (req.session.loggedin) {
         res.sendFile(path.join('../game.html'));
