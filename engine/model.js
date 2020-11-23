@@ -82,10 +82,6 @@ export default class Model {
             }
             
         }
-       // this.collision();
-
-        
-        // this.app.stage.addChild(this.obstacleArray[0])
 
         // Devil has passed the stage
         if (this.obstacleArray[0].y > (this.scaleHeight)) {
@@ -227,7 +223,6 @@ export default class Model {
     
 
     spawnObstacle() {
-        // for other game idea change 1 to 3
         for (let i = 0; i < 1; i++) {
             let devil = new PIXI.Sprite.from("../images/devil.png");
 
@@ -236,7 +231,6 @@ export default class Model {
 
             devil.x = (this.scaleWidth / 2) - (this.devilsWidth / 2); 
             devil.y = -(this.scaleHeight / 4);
-            // devil.y = (this.scaleHeight);
             
             this.obstacleArray.push(devil);
         }
@@ -245,32 +239,6 @@ export default class Model {
 
         // Determines which lane the devil will show up in
         let firstLocation = this.getRandomInt(5);
-
-        // comments below this comment are for the other game idea
-
-        // let secondLocation = this.getRandomInt(5);
-        // let thirdLocation = this.getRandomInt(5);
-        
-        // These "checkDups" loops are for making sure the devils aren't
-        // in the same lanes
-        // let checkDups = true;
-        // while (checkDups) {
-        //     if (secondLocation != firstLocation) {
-        //         checkDups = false;
-        //     } else {
-        //         secondLocation = this.getRandomInt(5);
-        //     }
-        // }
-
-        // checkDups = true;
-
-        // while (checkDups) {
-        //     if (thirdLocation != firstLocation && thirdLocation != secondLocation) {
-        //         checkDups = false;
-        //     } else {
-        //         thirdLocation = this.getRandomInt(5);
-        //     }
-        // }
 
 
         // Actually putting the devil in the lane
@@ -295,58 +263,11 @@ export default class Model {
         }
         this.app.stage.addChild(this.obstacleArray[0])
 
-        // placed = true;
-        // while (placed) {
-        //     if (secondLocation == 0) {
-        //         this.obstacleArray[1].x -= (this.devilsWidth * 2 * 2);
-        //         placed = false;
-        //     } else if (secondLocation == 1) {
-        //         this.obstacleArray[1].x -= (this.devilsWidth * 2);
-        //         placed = false;
-        //     } else if (secondLocation == 2) {
-        //         this.obstacleArray[1].x = (this.scaleWidth/2) - (this.devilsWidth/2); 
-        //         placed = false;
-        //     } else if (secondLocation == 3) {
-        //         this.obstacleArray[1].x += (this.devilsWidth * 2);
-        //         placed = false;
-        //     } else {
-        //         this.obstacleArray[1].x += (this.devilsWidth * 2 * 2);
-        //         placed = false;
-        //     }
-        // }
-        // this.app.stage.addChild(this.obstacleArray[1])
-
-        // placed = true;
-        // while (placed) {
-        //     if (thirdLocation == 0) {
-        //         this.obstacleArray[2].x -= (this.devilsWidth * 2 * 2);
-        //         placed = false;
-        //     } else if (thirdLocation == 1) {
-        //         this.obstacleArray[2].x -= (this.devilsWidth * 2);
-        //         placed = false;
-        //     } else if (thirdLocation == 2) {
-        //         this.obstacleArray[2].x = (this.scaleWidth/2) - (this.devilsWidth/2); 
-        //         placed = false;
-        //     } else if (thirdLocation == 3) {
-        //         this.obstacleArray[2].x += (this.devilsWidth * 2);
-        //         placed = false;
-        //     } else {
-        //         this.obstacleArray[2].x += (this.devilsWidth * 2 * 2);
-        //         placed = false;
-        //     }
-        // }
-        // this.app.stage.addChild(this.obstacleArray[2])
-
     }
 
     removeObstacle() {
         //removes the obstacle from the array of obstacles and the stage
 
-        // For other game idea
-        // this.app.stage.removeChild(this.obstacleArray[2]);
-        // this.obstacleArray.pop();
-        // this.app.stage.removeChild(this.obstacleArray[1]);
-        // this.obstacleArray.pop();
         this.app.stage.removeChild(this.obstacleArray[0]);
         this.obstacleArray.pop();
     }
@@ -366,30 +287,6 @@ export default class Model {
         });
     }
 }
-
-
-// some boiler plate code, dont know what to do with this just yet
-
-class Obstacle {
-    constructor() {
-        sprite= new PIXI.Sprite.from("../images/devil.png");
-        this.devilsWidth = screen.width * (1/20);
-        this.devilsHeight = screen.height * (2/14);
-
-        devil.width = this.devilsWidth;
-        devil.height = this.devilsHeight;
-        this.sprite.x = (this.scaleWidth / 2) - (this.devilsWidth / 2); 
-        // this.sprite.y = 0; 
-
-    }
-    move(){
-        //this needs to decrease the x postion of the obstacle 
-        //it will look like its moving toward the player
-    }
-    // functions to handle the dimensions of the obstacle
-
-}
-
 
 Model.Event = {
     LOSE: 1,
