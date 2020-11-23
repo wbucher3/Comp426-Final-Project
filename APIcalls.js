@@ -3,7 +3,6 @@ export const getAllScores = async function() {
         const result = await axios({
             method: 'get',
             url: 'https://comp426projectbackend.herokuapp.com/allScores',
-            // url: 'http://localhost:3030/allScores',
             withCredentials: true
         });
         return result;
@@ -19,7 +18,6 @@ export const login = async function(username, givenPassword) {
         const result = await axios({
             method: 'post',
             url: 'https://comp426projectbackend.herokuapp.com/login',
-            // url: 'http://localhost:3030/login',
             data: {
                 user: username,
                 password: givenPassword,
@@ -39,7 +37,6 @@ export const getName = async function() {
         const result = await axios({
             method: 'get',
             url: 'https://comp426projectbackend.herokuapp.com/user',
-            // url: 'http://localhost:3030/user',
             withCredentials: true
         });
         return result;
@@ -55,7 +52,6 @@ export const getSearchData = async function(searchTerm) {
         const result = await axios({
             method: 'get',
             url: 'https://comp426projectbackend.herokuapp.com/search/' + searchTerm,
-            // url: 'http://localhost:3030/search/' + searchTerm,
             withCredentials: true
         });
         return result;
@@ -71,7 +67,6 @@ export const updateScore = async function(id, score) {
         const result = await axios({
             method: 'put',
             url: 'https://comp426projectbackend.herokuapp.com/score/' + id,
-            // url: 'http://localhost:3030/score/' + id,
             data : {
                 score: score
             },
@@ -84,12 +79,10 @@ export const updateScore = async function(id, score) {
     } 
 }
 export const postScore = async function(score) {
-    console.log(score);
     try {
         const result = await axios({
             method: 'post',
             url: 'https://comp426projectbackend.herokuapp.com/score',
-            // url: 'http://localhost:3030/score',
             data: {
                 score: score
             },
@@ -135,4 +128,20 @@ export const signup = async function(username, givenPassword) {
     } catch (error) {
         return error;
     }
+}
+
+export const checkLogin = async function() {
+    try {
+        const result = await axios({
+            method: 'get',
+            url: 'https://comp426projectbackend.herokuapp.com/checkLogin',
+            // url: 'http://localhost:3030/checkLogin',
+            withCredentials: true
+        });
+        return result;
+
+    } catch (error) {
+        return error;
+    }
+    
 }

@@ -79,8 +79,7 @@ const renderContent = function() {
 
 const handleLogin = async function() {
     let username = document.getElementById("usernameField").value;
-    let password = document.getElementById("passwordField").value ;
-    //console.log( username + " " + password);
+    let password = document.getElementById("passwordField").value;
     let result = await login(username, password);
 
     if (result.data == true) {
@@ -90,16 +89,19 @@ const handleLogin = async function() {
         errorMessage.setAttribute("class", "message is-danger");
         let innerError = document.createElement("div");
         innerError.setAttribute("class", "message-body");
+        innerError.setAttribute("id", "errorMSG");
         innerError.innerText = "Invalid details.";
         errorMessage.appendChild(innerError);
         document.getElementById("mainCard").appendChild(errorMessage);
+        setTimeout(() => {
+            document.getElementById("errorMSG").remove();
+        }, 2000);
     }
 }
 
 const handleSignUp = async function() {
     let username = document.getElementById("usernameField").value;
     let password = document.getElementById("passwordField").value ;
-    //console.log( username + " " + password);
     let result = await signup(username, password);
 
     if (result.data == true) {
@@ -109,17 +111,15 @@ const handleSignUp = async function() {
         errorMessage.setAttribute("class", "message is-danger");
         let innerError = document.createElement("div");
         innerError.setAttribute("class", "message-body");
+        innerError.setAttribute("id", "takenMSG");
         innerError.innerText = "This username is already taken.";
         errorMessage.appendChild(innerError);
         document.getElementById("mainCard").appendChild(errorMessage);
+        setTimeout(() => {
+            document.getElementById("takenMSG").remove();
+        }, 2000);
     }
 }
-
-{/* <article class="message is-danger">
-  <div class="message-body">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
-  </div>
-</article> */}
 
 const domLoader = function() {
     let $root = document.getElementById("root") ; 

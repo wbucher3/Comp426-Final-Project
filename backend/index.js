@@ -30,7 +30,6 @@ app.use(cookieSession({
 let cors = require('cors');
 
 const corsConfig = {
-    // origin: 'http://localhost:3000',
     origin: 'https://wbucher3.github.io',
     credentials: true
 }
@@ -89,6 +88,15 @@ app.post('/signup', (req, res) => {
     
 });
 
+app.get('/checkLogin', (req,res) => {
+    if (req.session.user != null) {
+        res.json(true);
+    } else {
+        res.json(false);
+    }
+    return;
+});
+
 // For testing purposes
 app.delete('/deletee', (req, res) => {
     let {user} = req.body
@@ -104,7 +112,6 @@ app.delete('/deletee', (req, res) => {
 //Gets the username of the current session
 // in use
 app.get('/user', (req, res) => {
-    console.log(req.session.user);
     let username = req.session.user.toString();
     res.json(username);
     return;
@@ -123,15 +130,16 @@ app.get('/allScores', (req, res) => {
     return;
 });
 
-//idk what this does TODO
+// if logged in takes to game
 app.get('/game', (req,res) => {
     if (req.session.loggedin) {
         res.sendFile(path.join('../game.html'));
     }
+    return;
 });
 
 
-//returns all the ids? TODO
+//returns all the ids
 app.get('/score', (req, res) => {
     res.json(Score.getAllIDs());
     return;
@@ -174,11 +182,8 @@ app.post('/score', (req, res) => {
     if (req.session.user == undefined) {
         res.status(403).send("Unauthorized");
     }
-    console.log(req.body);
 
     let {score} = req.body;
-    console.log(score);
-    // TODO : add checks with like 400 or 500 errors to make sure everything is good
 
     //user now comes from the login to prevent them from posting to other users
     let s = Score.create(req.session.user , score);
@@ -242,11 +247,7 @@ app.delete('/score/:id', (req, res) => {
     res.json(true);
 });
 
-
-//const port = 3030;
-// heroku has an evironment varibale that will have a port number
-
  
 app.listen(PORT, () => {
-    console.log("Score up and running on port " + PORT);
+    console.log("Backend up and running on port " + PORT);
 })

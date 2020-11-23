@@ -62,10 +62,9 @@ export default class Model {
     }
 
     // the ticks are started in the view BTW
-    ticks (delta) {
+    ticks(delta) {
 
         // Makes the devil move across the screen.
-        // Incresase number from 1 to 3 for other game
         for (let i = 0; i < 1; i++) {
             // Adjust the number being added to make the devil
             // move faster or slower
@@ -77,13 +76,11 @@ export default class Model {
             //anything above 10.5 is really hard lmao
             if (this.speed <= 9.5) {
                 this.speed = this.speed * 1.02;
+            } else if (this.speed <= 10) {
+                this.speed = this.speed * 1.0005
             }
             
         }
-       // this.collision();
-
-        
-        // this.app.stage.addChild(this.obstacleArray[0])
 
         // Devil has passed the stage
         if (this.obstacleArray[0].y > (this.scaleHeight)) {
@@ -98,17 +95,6 @@ export default class Model {
                 this.lose = true;
             }
         }
-        /*
-        if (this.score == 20) {
-            this.speed = 6
-        } else if (this.score == 100) {
-            this.speed = 8;
-        } else if (this.score == 200) {
-            this.speed = 9;
-        } else if (this.score == 300) {
-            this.speed = 10;
-        }
-        */
        
     }
 
@@ -157,9 +143,6 @@ export default class Model {
                     enemyBounds.x < playerBounds.x + playerBounds.width && 
                     devilFeetStart + devilFeetHeight > newPlayerY && 
                     devilFeetStart < newPlayerY + ramNoseHeight) {
-                // The comment below this is for the other game idea.
-                // this.updateListener(Model.Event.LOSE);
-
                 
                 this.score += 2;
                 this.removeObstacle();
@@ -187,40 +170,9 @@ export default class Model {
                 this.player.sprite.x += (this.piecesWidth * 1.4) ;
             }   
         }
-        
-        //console.log(this.player.sprite.x + ", " + this.player.sprite.y);
-        //console.log(this.player.sprite.getBounds());
     }
 
-    //checks to see if an enemy has intersected with the player
-    // if true, then the game will end
-    collision() {
-        // check to see if any obstacles from array intersected with the player
-        // set the player to Dead if this is true
-        // end the game
-        // do some type of listener?
-
-        // change 1 to 3 for other game
-        for (let i = 0; i < 1 ; i++) {
-            let enemyBounds = this.obstacleArray[i].getBounds();
-            let playerBounds = this.player.sprite.getBounds();
-            if (enemyBounds.x + enemyBounds.width > playerBounds.x && 
-                    enemyBounds.x < playerBounds.x + playerBounds.width && 
-                    enemyBounds.y + enemyBounds.height > playerBounds.y && 
-                    enemyBounds.y < playerBounds.y + playerBounds.height) {
-                // The comment below this is for the other game idea.
-                // this.updateListener(Model.Event.LOSE);
-
-                this.score += 2;
-                this.removeObstacle();
-                this.spawnObstacle();
-                //console.log("Score: " + this.score)
-
-            }
-        }
-
-    }
-
+    
     onLose(callback) {
         this.addListener({
             event: Model.Event.LOSE,
@@ -244,7 +196,6 @@ export default class Model {
     
 
     spawnObstacle() {
-        // for other game idea change 1 to 3
         for (let i = 0; i < 1; i++) {
             let devil = new PIXI.Sprite.from("../images/devil.png");
 
@@ -253,7 +204,6 @@ export default class Model {
 
             devil.x = (this.scaleWidth / 2) - (this.devilsWidth / 2); 
             devil.y = -(this.scaleHeight / 4);
-            // devil.y = (this.scaleHeight);
             
             this.obstacleArray.push(devil);
         }
@@ -262,32 +212,6 @@ export default class Model {
 
         // Determines which lane the devil will show up in
         let firstLocation = this.getRandomInt(5);
-
-        // comments below this comment are for the other game idea
-
-        // let secondLocation = this.getRandomInt(5);
-        // let thirdLocation = this.getRandomInt(5);
-        
-        // These "checkDups" loops are for making sure the devils aren't
-        // in the same lanes
-        // let checkDups = true;
-        // while (checkDups) {
-        //     if (secondLocation != firstLocation) {
-        //         checkDups = false;
-        //     } else {
-        //         secondLocation = this.getRandomInt(5);
-        //     }
-        // }
-
-        // checkDups = true;
-
-        // while (checkDups) {
-        //     if (thirdLocation != firstLocation && thirdLocation != secondLocation) {
-        //         checkDups = false;
-        //     } else {
-        //         thirdLocation = this.getRandomInt(5);
-        //     }
-        // }
 
 
         // Actually putting the devil in the lane
@@ -312,58 +236,11 @@ export default class Model {
         }
         this.app.stage.addChild(this.obstacleArray[0])
 
-        // placed = true;
-        // while (placed) {
-        //     if (secondLocation == 0) {
-        //         this.obstacleArray[1].x -= (this.devilsWidth * 2 * 2);
-        //         placed = false;
-        //     } else if (secondLocation == 1) {
-        //         this.obstacleArray[1].x -= (this.devilsWidth * 2);
-        //         placed = false;
-        //     } else if (secondLocation == 2) {
-        //         this.obstacleArray[1].x = (this.scaleWidth/2) - (this.devilsWidth/2); 
-        //         placed = false;
-        //     } else if (secondLocation == 3) {
-        //         this.obstacleArray[1].x += (this.devilsWidth * 2);
-        //         placed = false;
-        //     } else {
-        //         this.obstacleArray[1].x += (this.devilsWidth * 2 * 2);
-        //         placed = false;
-        //     }
-        // }
-        // this.app.stage.addChild(this.obstacleArray[1])
-
-        // placed = true;
-        // while (placed) {
-        //     if (thirdLocation == 0) {
-        //         this.obstacleArray[2].x -= (this.devilsWidth * 2 * 2);
-        //         placed = false;
-        //     } else if (thirdLocation == 1) {
-        //         this.obstacleArray[2].x -= (this.devilsWidth * 2);
-        //         placed = false;
-        //     } else if (thirdLocation == 2) {
-        //         this.obstacleArray[2].x = (this.scaleWidth/2) - (this.devilsWidth/2); 
-        //         placed = false;
-        //     } else if (thirdLocation == 3) {
-        //         this.obstacleArray[2].x += (this.devilsWidth * 2);
-        //         placed = false;
-        //     } else {
-        //         this.obstacleArray[2].x += (this.devilsWidth * 2 * 2);
-        //         placed = false;
-        //     }
-        // }
-        // this.app.stage.addChild(this.obstacleArray[2])
-
     }
 
     removeObstacle() {
         //removes the obstacle from the array of obstacles and the stage
 
-        // For other game idea
-        // this.app.stage.removeChild(this.obstacleArray[2]);
-        // this.obstacleArray.pop();
-        // this.app.stage.removeChild(this.obstacleArray[1]);
-        // this.obstacleArray.pop();
         this.app.stage.removeChild(this.obstacleArray[0]);
         this.obstacleArray.pop();
     }
@@ -383,30 +260,6 @@ export default class Model {
         });
     }
 }
-
-
-// some boiler plate code, dont know what to do with this just yet
-
-class Obstacle {
-    constructor() {
-        sprite= new PIXI.Sprite.from("../images/devil.png");
-        this.devilsWidth = screen.width * (1/20);
-        this.devilsHeight = screen.height * (2/14);
-
-        devil.width = this.devilsWidth;
-        devil.height = this.devilsHeight;
-        this.sprite.x = (this.scaleWidth / 2) - (this.devilsWidth / 2); 
-        // this.sprite.y = 0; 
-
-    }
-    move(){
-        //this needs to decrease the x postion of the obstacle 
-        //it will look like its moving toward the player
-    }
-    // functions to handle the dimensions of the obstacle
-
-}
-
 
 Model.Event = {
     LOSE: 1,

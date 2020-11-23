@@ -1,20 +1,22 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
 } 
-#wholepage {
-    background-color: lightgray;
-
+html {
+    background-color: lightgray !important;
+    background-size: cover;
 }
 .page {
     padding-top: 20px;
     padding-right: 30px;
-    padding-bottom: 200px;
     padding-left: 30px;
 }
 .box {
     background-color: white;
     color:#25b4fc;
     font-family: Arial, Helvetica, sans-serif;
+}
+.infoBox {
+    width: 12vw;
 }
 .howToTitle{
     font-size: 30px;

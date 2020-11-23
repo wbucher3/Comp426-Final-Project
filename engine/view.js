@@ -1,5 +1,5 @@
 /* handle the display of game and webpage */
-import {getAllScores, getName, logOut, updateScore, postScore} from "../APIcalls.js" 
+import {getAllScores, getName, logOut, updateScore, postScore, checkLogin} from "../APIcalls.js" 
 
 export default class View {
     constructor(model) {
@@ -61,13 +61,11 @@ export default class View {
                 //push score
                 return await updateScore(currentScore[0].id, score);
             } else {
-                //console.log("no posted");
                 return;
             }
             
         } else {
             //this is their first score
-            //console.log("posted " + data.length);
             return await postScore(score);
             
         }
@@ -102,7 +100,7 @@ export default class View {
         scoreBoxPosition.setAttribute("class", "scorePadding")
 
         let scoreBox = document.createElement("div");
-        scoreBox.setAttribute("class", "box");
+        scoreBox.setAttribute("class", "box infobox");
 
         
         scoreBox.appendChild(this.renderScore());
@@ -110,7 +108,6 @@ export default class View {
         rightcol.appendChild(scoreBoxPosition);
 
 
-        //columnDiv.appendChild(leftcol);
         columnDiv.appendChild(centerCol);
         columnDiv.appendChild(rightcol); 
 
@@ -153,81 +150,104 @@ export default class View {
 
     async landingPage() {
         //overall id tag with div that holds everything. used to replace things
+        let check = await checkLogin();
+        
         let content = document.createElement("div") ;
         content.setAttribute("id", "landingPage");
 
+        if (check.data) {
+            let username = await this.getUsername();
 
-        let username = await this.getUsername();
 
+            //this div gets the spacing right
+            let buttonDiv = document.createElement("div");
+            buttonDiv.setAttribute("class", "startPadding")
 
-        //this div gets the spacing right
-        let buttonDiv = document.createElement("div");
-        buttonDiv.setAttribute("class", "startPadding")
+            let button = document.createElement("button");
+            button.setAttribute("class", "button is-large is-fullwidth growButton ");
+            button.setAttribute("id", "start");
+            button.innerHTML = "Hello there, " + username + "! Click Here to Play!";
+            button.addEventListener("click", this.startGame);
 
-        let button = document.createElement("button");
-        button.setAttribute("class", "button is-large is-fullwidth growButton ");
-        button.setAttribute("id", "start");
-        button.innerHTML = "Hello There, " + username + "! Click Here to Play!";
-        button.addEventListener("click", this.startGame);
+            //adds button to main page
+            buttonDiv.appendChild(button)
+            content.appendChild(buttonDiv) ;
 
-        //adds button to main page
-        buttonDiv.appendChild(button)
-        content.appendChild(buttonDiv) ;
-
-    
         
-        //lower box contains howto and leaderboard button
-        let lowerBox = document.createElement("div");
-        lowerBox.setAttribute("class", "");
+            
+            //lower box contains howto and leaderboard button
+            let lowerBox = document.createElement("div");
+            lowerBox.setAttribute("class", "");
 
-        let boxDiv = document.createElement("div");
-        boxDiv.setAttribute("class", "box");
+            let boxDiv = document.createElement("div");
+            boxDiv.setAttribute("class", "box");
 
-        let sectionDiv = document.createElement("div");
-        sectionDiv.setAttribute("class", "howToPadding");
-        sectionDiv.innerHTML = '<h1 class="howToTitle">How to Play!</h1>';
+            let sectionDiv = document.createElement("div");
+            sectionDiv.setAttribute("class", "howToPadding");
+            sectionDiv.innerHTML = '<h1 class="howToTitle">How to Play!</h1>';
 
-        let containerDiv = document.createElement("div");
-        containerDiv.setAttribute("class", "container");
+            let containerDiv = document.createElement("div");
+            containerDiv.setAttribute("class", "container");
 
-        let contentList = document.createElement("dl");
-        contentList.setAttribute("class", "content is-large");
-        contentList.innerHTML = `   <li>Move the Ram Side to Side using 'A' and 'D' or Left and Right Arrow keys</li>
-                                    <li>Headbutt the Dookies storming the court! They are having a hard time accepting their L!
-                                    <li>If 3 Dookies get by you, it's game over!</li>
-                                    <li>Headbutt Enough Dookies to Earn a spot on the Leaderboard!</li>`
-
-
-        let boardLink = document.createElement("div");
-        boardLink.setAttribute("class", "boardLinkPadding"); 
-        boardLink.innerHTML = ` <h1 class="leaderboard">
-                                    <a href="./leaderboard.html">View the Leaderboard</a>
-                                </h1>`
-
-        let logOutDiv = document.createElement("div");
-        logOutDiv.setAttribute("class", "boardLinkPadding"); 
-
-        let logOutButton = document.createElement("button");
-        logOutButton.setAttribute("class", "button growButton");
-        logOutButton.setAttribute("id", "logout");
-        logOutButton.innerText = "Logout"
-        logOutButton.addEventListener("click", this.logOut)
-        logOutDiv.appendChild(logOutButton);
+            let contentList = document.createElement("dl");
+            contentList.setAttribute("class", "content is-large");
+            contentList.innerHTML = `   <li>Move the Ram side to side using 'A' and 'D' or Left and Right arrow keys</li>
+                                        <li>Headbutt the Dookies storming the court! They are having a hard time accepting their L!
+                                        <li>The Dookies can get up to a speed of 10!</li>
+                                        <li>If 3 Dookies get by you, it's game over!</li>
+                                        <li>Each Dookie you hit adds 2 points to your score!</li>
+                                        <li>Headbutt enough Dookies to earn a spot on the leaderboard!</li>`
 
 
-        //combines all the stuff in the lower box
-        containerDiv.appendChild(contentList);
-        containerDiv.appendChild(boardLink);
-        containerDiv.appendChild(logOutDiv);
-        sectionDiv.appendChild(containerDiv);
-        boxDiv.appendChild(sectionDiv);
-        lowerBox.appendChild(boxDiv);
+            let boardLink = document.createElement("div");
+            boardLink.setAttribute("class", "boardLinkPadding"); 
+            boardLink.innerHTML = ` <h1 class="leaderboard">
+                                        <a href="./leaderboard.html">View the Leaderboard</a>
+                                    </h1>`
 
-        //adds all contents to one item and returns the item
-        content.appendChild(lowerBox);
-        this.$root = document.getElementById("root");
-        this.$root.appendChild(content) ;
-        return;
+            let logOutDiv = document.createElement("div");
+            logOutDiv.setAttribute("class", "boardLinkPadding"); 
+
+            let logOutButton = document.createElement("button");
+            logOutButton.setAttribute("class", "button growButton");
+            logOutButton.setAttribute("id", "logout");
+            logOutButton.innerText = "Logout"
+            logOutButton.addEventListener("click", this.logOut)
+            logOutDiv.appendChild(logOutButton);
+
+
+            //combines all the stuff in the lower box
+            containerDiv.appendChild(contentList);
+            containerDiv.appendChild(boardLink);
+            containerDiv.appendChild(logOutDiv);
+            sectionDiv.appendChild(containerDiv);
+            boxDiv.appendChild(sectionDiv);
+            lowerBox.appendChild(boxDiv);
+
+            //adds all contents to one item and returns the item
+            content.appendChild(lowerBox);
+            this.$root = document.getElementById("root");
+            this.$root.appendChild(content);
+            return;
+        } else {
+            let container = document.createElement("div");
+            container.setAttribute("class", "container has-text-centered");
+
+            let textBody = document.createElement("h1");
+            textBody.setAttribute("class", "title is-primary")
+            textBody.innerText = "You must be logged in to play!"; 
+
+            let backDiv = document.createElement("div");
+            backDiv.setAttribute("class", "content is-size-7");
+            backDiv.innerHTML = "<h1><a href=./index.html>Login</a></h1>"
+
+            container.appendChild(textBody);
+            container.appendChild(backDiv);
+
+            this.$root = document.getElementById("root");
+            this.$root.appendChild(container);
+            return;
+        }
     }
 
     async scorePage() {
