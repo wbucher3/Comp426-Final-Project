@@ -22,7 +22,7 @@ app.use(cookieSession({
     cookie: {
         // sameSite: 'Strict',
         // secure: true,
-        SameSite: 'Lax', 
+        SameSite: 'Strict',  //different capitalization?
         Secure: true
     }
 }));
